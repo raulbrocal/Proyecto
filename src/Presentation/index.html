@@ -1,12 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crew Bar</title>
+    <title>Luxury Restaurant</title>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css">
 </head>
+
 <body>
-    
+    <header>
+        <div class="container">
+            <h1 class="logo">Luxury Restaurant</h1>
+            <nav class="navigation">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Menu</a>
+                <a href="#">Reservations</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="banner">
+        <div class="container">
+            <h2 class="title">Welcome to Luxury Restaurant</h2>
+            <p class="text">Indulge yourself with our exquisite dishes and impeccable service. Book your table now and
+                experience the best of fine dining.</p>
+            <a href="#" class="button">Reserve now</a>
+        </div>
+    </section>
+
+    <section class="info">
+        <div class="container">
+            <div class="article">
+                <img src="img/chef.jpg" alt="Chef">
+                <h3 class="title">Our Chef</h3>
+                <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.
+                    Aliquam erat volutpat.</p>
+            </div>
+            <div class="article">
+                <img src="img/interior.jpg" alt="Interior">
+                <h3 class="title">The Restaurant</h3>
+                <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.
+                    Aliquam erat volutpat.</p>
+            </div>
+            <div class="article">
+                <img src="img/menu.jpg" alt="Menu">
+                <h3 class="title">Our Menu</h3>
+                <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.
+                    Aliquam erat volutpat.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="reservations">
+        <div class="container">
+            <h2 class="title">Make a Reservation</h2>
+            <form>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date" required>
+                <label for="time">Time</label>
+                <input type="time" id="time" name="time" required>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p class="text">&copy; 2023 Luxury Restaurant. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
+
 </html>
