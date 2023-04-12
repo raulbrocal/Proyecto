@@ -51,25 +51,21 @@ CREATE TABLE menu (
     description VARCHAR(255)
 );
 
-CREATE TABLE meal (
-    meal_id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE dishes (
+    dishes_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description VARCHAR(255),
     price DECIMAL(10 , 2 ),
-    menu_id INT,
-    FOREIGN KEY (menu_id)
-        REFERENCES menu (menu_id)
+    type VARCHAR(255) NOT NULL,
+    allergens VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE drink (
     drink_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    alcoholic BOOLEAN NOT NULL DEFAULT FALSE,
-    description VARCHAR(255),
+    type VARCHAR(255) NOT NULL,
     price DECIMAL(10 , 2 ),
-    menu_id INT,
-    FOREIGN KEY (menu_id)
-        REFERENCES menu (menu_id)
+    alcoholic BOOLEAN NOT NULL
 );
 
 CREATE TABLE dessert (
@@ -77,7 +73,32 @@ CREATE TABLE dessert (
     name VARCHAR(255) NOT NULL,
     description VARCHAR(255),
     price DECIMAL(10 , 2 ),
+    allergens VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE menuDrink (
     menu_id INT,
+    drink_id INT,
     FOREIGN KEY (menu_id)
-        REFERENCES menu (menu_id)
+        REFERENCES menu (menu_id),
+    FOREIGN KEY (drink_id)
+        REFERENCES drink (drink_id)
+);
+
+CREATE TABLE menuDishes (
+    menu_id INT,
+    dishes_id INT,
+    FOREIGN KEY (menu_id)
+        REFERENCES menu (menu_id),
+    FOREIGN KEY (dishes_id)
+        REFERENCES dishes (dishes_id)
+);
+
+CREATE TABLE menuDessert (
+    menu_id INT,
+    dessert_id INT,
+    FOREIGN KEY (menu_id)
+        REFERENCES menu (menu_id),
+    FOREIGN KEY (dessert_id)
+        REFERENCES dessert (dessert_id)
 );
