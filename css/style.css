@@ -21,6 +21,7 @@ body {
 .text {
     font-size: 18px;
     line-height: 1.5;
+    color: black;
 }
 
 .button {
@@ -41,7 +42,7 @@ body {
 
 /* Header styles */
 header {
-    background-color: #FFF;
+    background-color: black;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: fixed;
     top: 0;
@@ -69,10 +70,10 @@ header {
 
 /* Banner styles */
 .banner {
-    background-image: url("img/banner.jpg");
     background-size: cover;
     background-position: center;
-    height: 500px;
+    height: 800px;
+    width: auto;
     display: flex;
     align-items: center;
     justify-content: center;
