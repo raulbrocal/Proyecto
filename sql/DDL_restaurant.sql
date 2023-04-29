@@ -20,6 +20,7 @@ CREATE TABLE user (
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
     birth_date DATE NOT NULL,
     password VARCHAR(255) NOT NULL,
     profile ENUM('CLIENT', 'EMPLOYEE') NOT NULL DEFAULT 'CLIENT'
@@ -28,8 +29,6 @@ CREATE TABLE user (
 CREATE TABLE reservation (
     reservation_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
-    phone VARCHAR(20) NOT NULL,
-    email VARCHAR(255) NOT NULL,
     date DATE NOT NULL,
     time TIME NOT NULL,
     number_of_people INT(11) UNSIGNED NOT NULL,
@@ -41,11 +40,12 @@ CREATE TABLE reservation (
 
 CREATE TABLE dinnerTable (
     number INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
+    reservation_id INT,
+    available BOOLEAN,
     description VARCHAR(255),
     capacity INT NOT NULL,
-    FOREIGN KEY (user_id)
-        REFERENCES user (user_id)
+    FOREIGN KEY (reservation_id)
+        REFERENCES reservation (reservation_id)
 );
 
 CREATE TABLE menu (
