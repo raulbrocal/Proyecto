@@ -45,7 +45,6 @@ link[rel="icon"] {
     background-color: #D60C0C;
 }
 
-/* Header styles */
 header {
     background-color: #FFF;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -56,7 +55,6 @@ header {
     z-index: 100;
 }
 
-/* Banner styles */
 .banner {
     background-size: cover;
     background-position: center;
@@ -68,7 +66,6 @@ header {
     color: #FFF;
 }
 
-/* Info section styles */
 .info {
     background-color: #F7F7F7;
     padding: 50px 0;
@@ -124,4 +121,27 @@ header {
 
 .reservations input[type="submit"]:hover {
     background-color: #D60C0C;
+}
+
+.navbar-scroll {
+    background-color: black;
+}
+
+.navbar-scrolled .nav-link,
+.navbar-scrolled .navbar-toggler-icon,
+.navbar-scroll .navbar-brand {
+    color: #262626;
+}
+
+.navbar-brand {
+    font-size: unset;
+    height: 3.5rem;
+}
+
+button.btn {
+    color: white;
+}
+
+button.btn:hover {
+    background-color: white;
 }
