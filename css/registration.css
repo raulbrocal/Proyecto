@@ -42,21 +42,16 @@ button:disabled {
     color: white;
 }
 
-/* Capa que pone borde verde a los controles
-cuando su contenido es válido */
 .verde {
     border-color: green;
 }
 
-/* Capa que muestra los errores */
 #error {
     color: red;
     font-family: sans-serif;
     margin-top: 3em;
 }
 
-/* Capa inicialmente oculta
-Cuando se muestra desvanece el formulario */
 #telon {
     position: fixed;
     left: 0;
@@ -69,9 +64,6 @@ Cuando se muestra desvanece el formulario */
     display: none;
 }
 
-/* Capa por encima de la capa telon
-Inicialmente oculta con el mensaje
-de envío de datos correctos */
 #mensaje {
     position: fixed;
     left: 50%;
@@ -90,4 +82,41 @@ de envío de datos correctos */
     font-size: 2em;
     text-align: center;
     font-family: sans-serif;
+}
+
+header {
+    background-color: #FFF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.navbar-scroll {
+    background-color: black;
+}
+
+.navbar-scrolled .nav-link,
+.navbar-scrolled .navbar-toggler-icon,
+.navbar-scroll .navbar-brand {
+    color: #262626;
+}
+
+.navbar-brand {
+    font-size: unset;
+    height: 3.5rem;
+}
+
+button.btn {
+    color: white;
+}
+
+button.btn:hover {
+    background-color: white;
+}
+
+footer{
+    margin-top: 10%;
 }

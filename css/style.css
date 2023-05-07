@@ -1,8 +1,7 @@
-/* General styles */
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Rubik', sans-serif;
     font-size: 16px;
 }
 
@@ -18,31 +17,21 @@ link[rel="icon"] {
 }
 
 .title {
-    font-size: 36px;
-    font-weight: bold;
-    margin: 0;
+    background-color: #F7F7F7;
+    margin-top: 5%;
+    text-align: center;
+    border-top: solid black 1px;
+    border-bottom: solid black 1px;
+}
+
+.title h1{
+    margin: 1%;
 }
 
 .text {
     font-size: 18px;
     line-height: 1.5;
     color: black;
-}
-
-.button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #E20E0E;
-    color: #FFF;
-    text-decoration: none;
-    font-size: 18px;
-    border-radius: 5px;
-    margin-top: 20px;
-    transition: background-color 0.3s;
-}
-
-.button:hover {
-    background-color: #D60C0C;
 }
 
 header {
@@ -103,4 +92,8 @@ button.btn {
 
 button.btn:hover {
     background-color: white;
+}
+
+footer{
+    margin-top: 10%;
 }
