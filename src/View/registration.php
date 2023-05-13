@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar usuario</title>
+    <title>Únete a nosotros</title>
+    <link rel="icon" href="../../img/logo.png">
     <link rel="stylesheet" href="../../css/registration.css">
     <script src="../../js/registration.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -43,29 +44,37 @@
     </header>
 
     <main>
-        <h1>Registrate</h1>
-        <form action="../BusinessLogic/login.php" autocomplete="off">
-            <label for="nombre">Nombre</label><br>
-            <input type="text" id="nombre" name="nombre" placeholder="Nombre*" autofocus maxlength="20"><br>
-            <label for="apellidos">Apellidos</label><br>
-            <input type="text" id="apellidos" name="apellidos" maxlength="60"><br>
+        <h1>Únete a nosotros</h1>
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off">
+            <label for="name">Nombre</label><br>
+            <input type="text" id="name" name="name" placeholder="Nombre*" autofocus maxlength="20" required><br>
+            <label for="surname">Apellidos</label><br>
+            <input type="text" id="surname" name="surname" maxlength="60" required><br>
             <label for="email">Email</label><br>
-            <input type="text" id="email" name="email" placeholder="hola@gmail.com" maxlength="250"><br>
-            <label for="NIF">NIF</label><br>
-            <input type="text" id="NIF" name="NIF" maxlength="9"><br>
-            <button id="botonEnviar" disabled>Enviar</button>
+            <input type="text" id="email" name="email" placeholder="hola@gmail.com" maxlength="250" required><br>
+            <label for="birth">Fecha de nacimiento</label><br>
+            <input type="date" name="birth" id="birth" required><br>
+            <label for="phone">Número de teléfono</label><br>
+            <input type="text" id="phone" name="phone" maxlength="10" required><br>
+            <label for="username">Usuario</label><br>
+            <input type="text" id="username" name="username" placeholder="usuario_123" autofocus maxlength="20" required><br>
+            <label for="password">Contraseña</label><br>
+            <input type="password" name="password" id="password" placeholder="8-10 caracteres" required>
+            <button type="submit" name="submit" id="submit" disabled>Enviar</button>
         </form>
     </main>
-
-    <div id="error">
-
-    </div>
 
     <div id="telon">
         <div id="mensaje">
             <p>Los datos se han enviado correctamente</p>
         </div>
     </div>
+
+    <footer>
+        <div class="container">
+            <p class="text" style="text-align: center;">&copy; 2023 Crew Bar. All rights reserved.</p>
+        </div>
+    </footer>
 
 </body>
 

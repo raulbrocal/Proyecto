@@ -1,18 +1,21 @@
 main {
     width: 100%;
-    max-width: 400px;
+    max-width: 600px;
     margin: auto;
+    margin-top: 75px;
 }
 
 h1 {
     text-align: center;
     font-family: sans-serif;
+    padding: 15px;
 }
 
 label {
     text-align: left;
     font-family: sans-serif;
     color: gray;
+    margin-top: 15px;
 }
 
 input {
@@ -27,7 +30,7 @@ input {
     margin: 10px 0;
 }
 
-button {
+#submit {
     width: 100%;
     font-size: 1.5em;
     border: none;
@@ -35,21 +38,13 @@ button {
     padding: .4em;
     color: white;
     border-radius: 10px;
+    margin-top: 35px;
 }
 
 button:disabled {
     background-color: lightgray;
     color: white;
-}
-
-.verde {
-    border-color: green;
-}
-
-#error {
-    color: red;
-    font-family: sans-serif;
-    margin-top: 3em;
+    margin-top: 5px;
 }
 
 #telon {
@@ -118,5 +113,8 @@ button.btn:hover {
 }
 
 footer{
-    margin-top: 10%;
+    position: fixed;
+    bottom: 0;
+    margin: auto;
+    width: auto;
 }

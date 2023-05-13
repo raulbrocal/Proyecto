@@ -16,9 +16,9 @@ CREATE TABLE restaurant (
 );
 
 CREATE TABLE user (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
+    user_id VARCHAR(20) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    surname VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     phone VARCHAR(20) NOT NULL,
     birth_date DATE NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE user (
 
 CREATE TABLE reservation (
     reservation_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
+    user_id VARCHAR(20),
     date DATE NOT NULL,
     time TIME NOT NULL,
     number_of_people INT(11) UNSIGNED NOT NULL,
