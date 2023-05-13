@@ -53,22 +53,16 @@
             <label for="email">Email</label><br>
             <input type="text" id="email" name="email" placeholder="hola@gmail.com" maxlength="250" required><br>
             <label for="birth">Fecha de nacimiento</label><br>
-            <input type="date" name="birth" id="birth" required><br>
+            <input type="date" id="birth" name="birth" max="2020-12-31" required><br>
             <label for="phone">Número de teléfono</label><br>
-            <input type="text" id="phone" name="phone" maxlength="10" required><br>
+            <input type="text" id="phone" name="phone" maxlength="10" title="Déjenos su número de teléfono para contactar con usted." required><br>
             <label for="username">Usuario</label><br>
-            <input type="text" id="username" name="username" placeholder="usuario_123" autofocus maxlength="20" required><br>
+            <input type="text" id="username" name="username" placeholder="usuario_123" autofocus maxlength="20" title="El nombre de usuario debe ser una palabra de 5 a 20 caracteres sin espacios pudiendo incluir &quot.&quot y &quot_&quot" required><br>
             <label for="password">Contraseña</label><br>
-            <input type="password" name="password" id="password" placeholder="8-10 caracteres" required>
+            <input type="password" name="password" id="password" placeholder="**********" title="La contraseña debe tener una longitud mínima de 8 caracteres y contener en ella una minúscula, una mayúscula, un número y un caracteres especial" required>
             <button type="submit" name="submit" id="submit" disabled>Enviar</button>
         </form>
     </main>
-
-    <div id="telon">
-        <div id="mensaje">
-            <p>Los datos se han enviado correctamente</p>
-        </div>
-    </div>
 
     <footer>
         <div class="container">
