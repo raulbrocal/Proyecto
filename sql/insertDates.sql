@@ -1,5 +1,9 @@
 USE restaurantDB;
+-- Información del restaurante
+INSERT INTO restaurant (name, address, city, country, phone, email, social, closing_day, opening_time, closing_time)
+VALUES ("Crew Bar","Carrer Platja n3", "Port Adriano", "Islas Baleares", 638440177, "crewbar@gmail.com","@crewbar", 7, "08:00:00", "22:00:00");
 
+-- Menú
 INSERT INTO drink (name, type, price, alcoholic)
 VALUES
 ('Agua', 'Refresco', 2.20, FALSE),

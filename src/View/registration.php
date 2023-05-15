@@ -1,3 +1,14 @@
+<?php
+require("../Controller/session.php");
+try {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        
+    }
+} catch (\Throwable $th) {
+    $error = true;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,7 +46,9 @@
                                     mesa</button></a>
                         </li>
                         <li class="nav1-item">
-                            <a href="#"><button type="button" class="btn" id="translate_button">ES</button></a>
+                            <a href="user.php"><button type="button" class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                    </svg></button></a>
                         </li>
                     </ul>
                 </div>
@@ -73,3 +86,8 @@
 </body>
 
 </html>
+
+<?php
+if (isset($error)) {
+    echo '<script type="text/javascript">alert("Alert message here")</script>';
+}
