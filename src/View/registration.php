@@ -2,7 +2,9 @@
 require("../Controller/session.php");
 try {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        
+        require_once("../Controller/session.php");
+        $userBL = new Session;
+        $newUser = $userBL->registerNewUser($_POST['username'], $_POST['name'], $_POST['surname'], $_POST['email'], $_POST['phone'], $_POST['birth'], $_POST['password']);
     }
 } catch (\Throwable $th) {
     $error = true;
@@ -18,12 +20,61 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Únete a nosotros</title>
     <link rel="icon" href="../../img/logo.png">
-    <link rel="stylesheet" href="../../css/registration.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <script src="../../js/registration.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <style>
+        main {
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            margin-top: 50px;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: sans-serif;
+            padding: 15px;
+        }
+
+        label {
+            text-align: left;
+            font-family: sans-serif;
+            color: gray;
+        }
+
+        input {
+            width: 100%;
+            border: 5px solid #f29100;
+            border-radius: 50px;
+            font-family: Poppins, sans-serif;
+            font-weight: 400;
+            font-size: 18px;
+            color: #000;
+            padding: 7px 25px;
+            margin: 10px 0;
+        }
+
+        #submit {
+            width: 100%;
+            font-size: 1.5em;
+            border: none;
+            background-color: gray;
+            padding: .4em;
+            color: white;
+            border-radius: 10px;
+            margin-top: 35px;
+        }
+
+        button:disabled {
+            background-color: lightgray;
+            color: white;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 
 <body>
