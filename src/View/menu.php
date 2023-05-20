@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Únete a nosotros</title>
+    <title>Nuestra carta</title>
     <link rel="icon" href="../../img/logo.png">
     <link rel="stylesheet" href="../../css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -111,31 +111,36 @@
         </div>
 
         <div id="main">
-            <?php require_once("../Controller/drink.php"); ?>
+            <?php require_once(dirname(__DIR__) . "/Controller/Menu/drink.php"); ?>
             <div id="beverages" class="category">
-                <div id="titulo">
+                <div id="titulo" style="background-color: lightcoral;">
                     <h1>BEBIDAS</h1>
                 </div>
                 <?php $drinksBL = new Beverage();
                 $drinksBL->getDrinks() ?>
             </div>
-
+            <?php require_once(dirname(__DIR__) . "/Controller/Menu/starters.php"); ?>
             <div id="appetizers" class="category">
-                <h2>Entrantes</h2>
-                <div class="item">Entrante 1</div>
-                <div class="item">Entrante 2</div>
-                <div class="item">Entrante 3</div>
+                <div id="titulo" style="background-color: lightgreen;">
+                    <h1>ENTRANTES</h1>
+                </div>
+                <?php $startersBL = new Appetizers();
+                $startersBL->getStarters() ?>
             </div>
 
             <div id="food" class="category">
-                <h2>Comida</h2>
+                <div id="titulo" style="background-color: lightblue;">
+                    <h1>COMIDAS</h1>
+                </div>
                 <div class="item">Comida 1</div>
                 <div class="item">Comida 2</div>
                 <div class="item">Comida 3</div>
             </div>
 
             <div id="desserts" class="category">
-                <h2>Postres</h2>
+                <div id="titulo" style="background-color: lightyellow;">
+                    <h1>POSTRES</h1>
+                </div>
                 <div class="item">Postre 1</div>
                 <div class="item">Postre 2</div>
                 <div class="item">Postre 3</div>
