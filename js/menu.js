@@ -8,30 +8,30 @@ document.addEventListener('DOMContentLoaded', function () {
     // Obtener los botones de categoría
     const beverageButton = document.createElement('a');
     beverageButton.href = '#';
-    beverageButton.textContent = 'Bebidas';
+    beverageButton.textContent = 'BEBIDAS';
     beverageButton.classList.add('category-button');
 
     const foodButton = document.createElement('a');
     foodButton.href = '#';
-    foodButton.textContent = 'Comida';
+    foodButton.textContent = 'COMIDA';
     foodButton.classList.add('category-button');
 
     const appetizerButton = document.createElement('a');
     appetizerButton.href = '#';
-    appetizerButton.textContent = 'Entrantes';
+    appetizerButton.textContent = 'ENTRANTES';
     appetizerButton.classList.add('category-button');
 
     const dessertButton = document.createElement('a');
     dessertButton.href = '#';
     dessertButton.style.marginRight = 0;
-    dessertButton.textContent = 'Postres';
+    dessertButton.textContent = 'POSTRES';
     dessertButton.classList.add('category-button');
 
     // Función para mostrar una categoría y ocultar las demás
     function showCategory(category) {
         beverages.style.display = 'none';
-        food.style.display = 'none';
         appetizers.style.display = 'none';
+        food.style.display = 'none';
         desserts.style.display = 'none';
 
         category.style.display = 'block';
@@ -73,8 +73,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Agregar los botones de categoría a la barra de navegación
     const navbar = document.getElementById('navbarMenu');
     navbar.appendChild(beverageButton);
-    navbar.appendChild(foodButton);
     navbar.appendChild(appetizerButton);
+    navbar.appendChild(foodButton);
     navbar.appendChild(dessertButton);
 
     // Mostrar la categoría de bebidas por defecto

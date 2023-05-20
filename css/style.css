@@ -36,6 +36,7 @@ h1 {
     font-size: 18px;
     line-height: 1.5;
     color: black;
+    margin-bottom: 0px;
 }
 
 header {
@@ -91,5 +92,10 @@ button.btn:hover {
 }
 
 footer {
-    margin-top: 25px;
+    background-color: #f1f1f1;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }

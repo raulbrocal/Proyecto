@@ -14,7 +14,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <style>
-        /* Estilos CSS para los botones de categorías */
+        .category {
+            margin: auto;
+            width: 85%;
+        }
+
         .category-button {
             display: inline-block;
             padding: 5px 10px;
@@ -35,6 +39,38 @@
 
         .item {
             margin-bottom: 5px;
+        }
+
+        table,
+        td,
+        tr {
+            border-collapse: collapse;
+            width: 100%;
+            text-align: left;
+        }
+
+        #cuadrado {
+            width: 30%;
+            height: 150px;
+            background-color: #f1f1f1;
+        }
+
+        #titulo {
+            width: 100%;
+            border-radius: 15px;
+            background-color: lightgreen;
+            padding: 15px;
+            margin: 35px 0 45px 0;
+            border-bottom: #ccc 1px solid;
+        }
+
+        #objeto {
+            width: 25%;
+            border-radius: 5px;
+            border-left: #666 solid 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            margin: 50px 50px 50px 50px;
         }
     </style>
 </head>
@@ -70,24 +106,18 @@
     </header>
 
     <main style="text-align: center;">
-        <h2 class="menu-title">Estás en la zona de menú</h2>
 
         <div class="navbar navbar-expand-lg shadow-0 border-bottom border-top border-dark justify-content-center" id="navbarMenu">
         </div>
 
         <div id="main">
+            <?php require_once("../Controller/drink.php"); ?>
             <div id="beverages" class="category">
-                <h2>Bebidas</h2>
-                <div class="item">Bebida 1</div>
-                <div class="item">Bebida 2</div>
-                <div class="item">Bebida 3</div>
-            </div>
-
-            <div id="food" class="category">
-                <h2>Comida</h2>
-                <div class="item">Comida 1</div>
-                <div class="item">Comida 2</div>
-                <div class="item">Comida 3</div>
+                <div id="titulo">
+                    <h1>BEBIDAS</h1>
+                </div>
+                <?php $drinksBL = new Beverage();
+                $drinksBL->getDrinks() ?>
             </div>
 
             <div id="appetizers" class="category">
@@ -95,6 +125,13 @@
                 <div class="item">Entrante 1</div>
                 <div class="item">Entrante 2</div>
                 <div class="item">Entrante 3</div>
+            </div>
+
+            <div id="food" class="category">
+                <h2>Comida</h2>
+                <div class="item">Comida 1</div>
+                <div class="item">Comida 2</div>
+                <div class="item">Comida 3</div>
             </div>
 
             <div id="desserts" class="category">

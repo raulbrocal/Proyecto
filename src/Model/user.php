@@ -1,6 +1,6 @@
 <?php
 
-require_once("../Model/connection.php");
+require_once("connection.php");
 
 class User
 {

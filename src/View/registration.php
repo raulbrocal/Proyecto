@@ -5,6 +5,7 @@ try {
         require_once("../Controller/session.php");
         $userBL = new Session;
         $newUser = $userBL->registerNewUser($_POST['username'], $_POST['name'], $_POST['surname'], $_POST['email'], $_POST['phone'], $_POST['birth'], $_POST['password']);
+        header("index.php");
     }
 } catch (\Throwable $th) {
     $error = true;
