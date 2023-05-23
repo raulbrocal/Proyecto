@@ -7,10 +7,8 @@ VALUES ("Crew Bar","Carrer Platja n3", "Port Adriano", "Islas Baleares", 6384401
 INSERT INTO drink (name, ml, type, price, alcoholic)
 VALUES
 ('Agua', 500, 'Refresco', 2.20, FALSE),
-('Agua con gas', 500, 'Refresco', 2.20, FALSE),
 ('Coca-Cola', 355, 'Refresco', 2.50, FALSE),
 ('Coca-Cola Zero', 355, 'Refresco', 2.50, FALSE),
-('Coca-Cola S/C', 355, 'Refresco', 2.50, FALSE),
 ('Pepsi', 355, 'Refresco', 2.50, FALSE),
 ('Pepsi Max', 355, 'Refresco', 2.50, FALSE),
 ('Sprite', 355, 'Refresco', 2.50, FALSE),
@@ -22,16 +20,15 @@ VALUES
 ('Dr Pepper', 355, 'Refresco', 2.50, FALSE),
 ('Canada Dry', 355, 'Refresco', 2.50, FALSE),
 ('Schweppes', 355, 'Refresco', 2.50, FALSE),
-('Lemonade', 355, 'Refresco', 2.75, FALSE),
-('Iced Tea', 355, 'Refresco', 2.75, FALSE),
-('Ginger Ale', 355, 'Refresco', 2.50, FALSE),
+('Aquarius Naranja', 355, 'Refresco', 2.75, FALSE),
+('Aquarius Limón', 355, 'Refresco', 2.75, FALSE),
 ('Tonic Water', 355, 'Refresco', 2.50, FALSE),
 ('Lime Soda', 355, 'Refresco', 2.50, FALSE),
 ('Orange Crush', 355, 'Refresco', 2.50, FALSE),
 ('Grape Soda', 355, 'Refresco', 2.50, FALSE),
 ('Cream Soda', 355, 'Refresco', 2.50, FALSE),
 ('Root Beer', 355, 'Refresco', 2.50, FALSE),
-('Apple Cider', 355, 'Refresco', 3.00, FALSE),
+('Nestea Limón', 355, 'Refresco', 3.00, FALSE),
 ('Cabernet Sauvignon', 750, 'Vino tinto', 25.00, TRUE),
 ('Merlot', 750, 'Vino tinto', 20.00, TRUE),
 ('Syrah', 750, 'Vino tinto', 30.00, TRUE),
@@ -84,10 +81,7 @@ VALUES
 ('Pulpo a la gallega', 'Pulpo cocido con pimentón y aceite de oliva', 12.00, 'entrante', 'moluscos'),
 ('Ensaladilla rusa', 'Ensaladilla de patata, zanahoria, guisantes, atún, huevo y mayonesa', 6.50, 'entrante', 'huevo, pescado'),
 ('Gambas al ajillo', 'Gambas salteadas en aceite de oliva, ajo y guindilla', 11.00, 'entrante', 'marisco'),
-('Tostada de salmón ahumado', 'Tostada de pan con salmón ahumado, queso crema y eneldo', 9.50, 'entrante', 'lácteos, pescado');
-
-INSERT INTO dishes (name, description, price, type, allergens)
-VALUES 
+('Tostada de salmón ahumado', 'Tostada de pan con salmón ahumado, queso crema y eneldo', 9.50, 'entrante', 'lácteos, pescado'),
 ('Entrecot a la parrilla', 'Jugoso entrecot a la parrilla con patatas y verduras al grill', 22.50, 'carne', 'Gluten, lactosa'),
 ('Solomillo Wellington', 'Delicioso solomillo envuelto en hojaldre con patatas y salsa de champiñones', 28.75, 'carne', 'Gluten, huevo, frutos secos'),
 ('Rabo de toro estofado', 'Rabo de toro cocido a fuego lento con patatas y verduras', 18.95, 'carne', 'Apio'),
@@ -102,13 +96,10 @@ VALUES
 ('Hamburguesa de la casa', 'Hamburguesa de ternera casera con patatas y ensalada', 13.50, 'carne', 'Gluten, lactosa'),
 ('Lomo de cerdo al horno', 'Lomo de cerdo asado con patatas y ensalada', 15.25, 'carne', 'Lactosa'),
 ('Pollo al curry', 'Pollo en salsa de curry con arroz basmati', 13.95, 'carne', 'Lactosa'),
-('Escalope de ternera', 'Escalope de ternera con patatas fritas y ensalada', 14.50, 'carne', 'Gluten, lactosa');
-
-INSERT INTO dishes (name, description, price, type, allergens) VALUES
+('Escalope de ternera', 'Escalope de ternera con patatas fritas y ensalada', 14.50, 'carne', 'Gluten, lactosa'),
 ("Salmón a la parrilla", "Salmón a la parrilla con limón y hierbas", 15.99, "pescado", "sin alérgenos"),
 ("Atún con salsa de soja", "Atún fresco con salsa de soja y jengibre", 18.99, "pescado", "contiene soja"),
 ("Paella de mariscos", "Arroz con mariscos y verduras", 22.50, "pescado", "sin alérgenos"),
-("Ceviche de pescado", "Pescado marinado en limón y especias, con cebolla y cilantro", 12.99, "Pescado", "sin alérgenos"),
 ("Lubina al horno", "Lubina al horno con patatas y tomate", 17.99, "pescado", "sin alérgenos"),
 ("Calamares a la romana", "Calamares rebozados y fritos", 10.50, "pescado", "contiene gluten"),
 ("Bacalao a la vizcaína", "Bacalao con salsa de tomate y pimientos", 19.99, "pescado", "sin alérgenos"),
@@ -120,11 +111,7 @@ INSERT INTO dishes (name, description, price, type, allergens) VALUES
 ("Tacos de pescado", "Tacos de pescado con salsa de aguacate y cilantro", 11.99, "pescado", "contiene lácteos"),
 ("Rodaballo al horno", "Rodaballo al horno con patatas y cebolla", 21.99, "pescado", "sin alérgenos"),
 ("Brocheta de langostinos", "Brocheta de langostinos a la parrilla con verduras", 19.50, "pescado", "sin alérgenos"),
-("Gazpacho de melón con langostinos", "Gazpacho de melón con langostinos y jamón serrano", 12.99, "pescado", "contiene lácteos");
-
-INSERT INTO dishes (name, description, price, type, allergens)
-VALUES
-("Margarita", "Salsa de tomate, mozzarella y albahaca", 9.99, "pizza", "Gluten"),
+("Gazpacho de melón con langostinos", "Gazpacho de melón con langostinos y jamón serrano", 12.99, "pescado", "contiene lácteos"),("Margarita", "Salsa de tomate, mozzarella y albahaca", 9.99, "pizza", "Gluten"),
 ("Hawaiana", "Salsa de tomate, mozzarella, jamón y piña", 11.99, "pizza", "Gluten, lactosa"),
 ("Pepperoni", "Salsa de tomate, mozzarella y pepperoni", 10.99, "pizza", "Gluten, lactosa"),
 ("Cuatro quesos", "Salsa de tomate, mozzarella, gorgonzola, parmesano y provolone", 12.99, "pizza", "Gluten, lactosa"),

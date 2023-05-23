@@ -2,25 +2,25 @@
 
 require_once(dirname(__DIR__) . "/connection.php");
 
-class Starters
+class Dessert
 {
     function connection()
     {
         try {
             return mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
         } catch (Exception $e) {
-            die("Could not connect to database:" . $e->getMessage());
+            return ("Could not connect to database:" . $e->getMessage());
         }
     }
-    function getStarters()
+    function getDesserts()
     {
         $conn = $this->connection();
-        $stmt = "SELECT name, description, allergens, price FROM dishes WHERE type = 'entrante' ORDER BY name;";
+        $stmt = "SELECT name, description, allergens, price FROM dessert ORDER BY name;";
         $res = $conn->query($stmt);
-        $starters = array();
+        $desserts = array();
         if ($res->num_rows > 0) {
             while ($row = $res->fetch_assoc()) {
-                $starters[] = $row;
+                $desserts[] = $row;
             }
         }
         $conn->close();

@@ -118,32 +118,34 @@
                 </div>
                 <?php $drinksBL = new Beverage();
                 $drinksBL->getDrinks() ?>
+                <br><br><br><br><br>
             </div>
             <?php require_once(dirname(__DIR__) . "/Controller/Menu/starters.php"); ?>
             <div id="appetizers" class="category">
                 <div id="titulo" style="background-color: lightgreen;">
                     <h1>ENTRANTES</h1>
                 </div>
-                <?php $startersBL = new Appetizers();
+                <?php $startersBL = new Appetizer();
                 $startersBL->getStarters() ?>
+                <br><br><br><br><br>
             </div>
-
+            <?php require_once(dirname(__DIR__) . "/Controller/Menu/food.php"); ?>
             <div id="food" class="category">
                 <div id="titulo" style="background-color: lightblue;">
                     <h1>COMIDAS</h1>
                 </div>
-                <div class="item">Comida 1</div>
-                <div class="item">Comida 2</div>
-                <div class="item">Comida 3</div>
+                <?php $foodBL = new Meal();
+                $foodBL->getFoods() ?>
+                <br><br><br><br><br>
             </div>
-
+            <?php require_once(dirname(__DIR__) . "/Controller/Menu/dessert.php"); ?>
             <div id="desserts" class="category">
                 <div id="titulo" style="background-color: lightyellow;">
                     <h1>POSTRES</h1>
                 </div>
-                <div class="item">Postre 1</div>
-                <div class="item">Postre 2</div>
-                <div class="item">Postre 3</div>
+                <?php $dessertBL = new Afters();
+                $dessertBL->getDesserts() ?>
+                <br><br><br><br><br>
             </div>
         </div>
 

@@ -9,7 +9,7 @@ class User
         try {
             return mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
         } catch (Exception $e) {
-            die("Could not connect to database:" . $e->getMessage());
+            return("Could not connect to database:" . $e->getMessage());
         }
     }
     function registerNewUser($user, $name, $surname, $email, $phone, $birth, $psswd, $profile)
