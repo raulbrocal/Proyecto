@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Únete a nosotros</title>
     <link rel="icon" href="../../img/logo.png">
-    <link rel="stylesheet" href="../../css/registration.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <script src="../../js/registration.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -33,6 +33,9 @@
                         <li class="nav-item">
                             <a href="reservation.php"><button type="button" class="btn">Reserva tu
                                     mesa</button></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="aboutus.php"><button type="button" class="btn">Sobre nosotros</button></a>
                         </li>
                         <li class="nav1-item">
                             <a href="user.php"><button type="button" class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
