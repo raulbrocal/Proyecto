@@ -27,7 +27,39 @@ try {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../js/login.js"></script>
     <style>
+        .toast-container {
+            z-index: 9999;
+            top: 5.5%;
+            right: 1px;
+            transform: translate(-5.5%);
+            max-width: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .toast {
+            background-color: #f8f9fa;
+            border: 1px solid #dcdcdc;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .toast-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            border-radius: 5px;
+        }
+
+        .toast-body {
+            margin-bottom: 10px;
+        }
+
         main {
             width: 100%;
             max-width: 600px;
@@ -109,6 +141,28 @@ try {
                 </div>
             </div>
         </nav>
+        <div class="toast-container position-fixed">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto">Inicio de sesión</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    <form method="POST" action="../Controller/login.php">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Nombre de usuario</label>
+                            <input type="text" class="form-control" id="username" placeholder="Ingrese su nombre de usuario">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="password" placeholder="Ingrese su contraseña">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                        <a class="btn btn-primary float-end" href="./registration.php" role="button">Registrate</a>
+                    </form>
+                </div>
+            </div>
+        </div>
     </header>
 
     <main>
@@ -124,10 +178,10 @@ try {
             <input type="date" id="birth" name="birth" max="2020-12-31" required><br>
             <label for="phone">Número de teléfono</label><br>
             <input type="text" id="phone" name="phone" maxlength="10" title="Déjenos su número de teléfono para contactar con usted." required><br>
-            <label for="username">Usuario</label><br>
-            <input type="text" id="username" name="username" placeholder="usuario_123" autofocus maxlength="20" title="El nombre de usuario debe ser una palabra de 5 a 20 caracteres sin espacios pudiendo incluir &quot.&quot y &quot_&quot" required><br>
-            <label for="password">Contraseña</label><br>
-            <input type="password" name="password" id="password" placeholder="**********" title="La contraseña debe tener una longitud mínima de 8 caracteres y contener en ella una minúscula, una mayúscula, un número y un caracteres especial" required>
+            <label for="user">Usuario</label><br>
+            <input type="text" id="user" name="user" placeholder="usuario_123" autofocus maxlength="20" title="El nombre de usuario debe ser una palabra de 5 a 20 caracteres sin espacios pudiendo incluir &quot.&quot y &quot_&quot" required><br>
+            <label for="psswrd">Contraseña</label><br>
+            <input type="psswrd" name="psswrd" id="psswrd" placeholder="**********" title="La contraseña debe tener una longitud mínima de 8 caracteres y contener en ella una minúscula, una mayúscula, un número y un caracteres especial" required>
             <button type="submit" name="submit" id="submit" disabled>Enviar</button>
         </form>
     </main>
