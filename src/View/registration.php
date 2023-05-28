@@ -1,14 +1,9 @@
 <?php
-require("../Controller/session.php");
-try {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        require_once("../Controller/session.php");
-        $userBL = new Session;
-        $newUser = $userBL->registerNewUser($_POST['username'], $_POST['name'], $_POST['surname'], $_POST['email'], $_POST['phone'], $_POST['birth'], $_POST['password']);
-        header("index.php");
-    }
-} catch (\Throwable $th) {
-    $error = true;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    require_once("../Controller/session.php");
+    $userBL = new Session;
+    $newUser = $userBL->registerNewUser($_POST['username'], $_POST['name'], $_POST['surname'], $_POST['email'], $_POST['phone'], $_POST['birth'], $_POST['password']);
 }
 
 ?>
@@ -30,7 +25,7 @@ try {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../js/login.js"></script>
     <style>
-        .toast-container {
+        /* .toast-container {
             z-index: 9999;
             top: 5.5%;
             right: 1px;
@@ -58,7 +53,7 @@ try {
 
         .toast-body {
             margin-bottom: 10px;
-        }
+        } */
 
         main {
             width: 100%;
@@ -141,7 +136,7 @@ try {
                 </div>
             </div>
         </nav>
-        <div class="toast-container position-fixed">
+        <!-- <div class="toast-container position-fixed">
             <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
                     <strong class="me-auto">Inicio de sesión</strong>
@@ -162,7 +157,7 @@ try {
                     </form>
                 </div>
             </div>
-        </div>
+        </div> -->
     </header>
 
     <main>
@@ -178,10 +173,10 @@ try {
             <input type="date" id="birth" name="birth" max="2020-12-31" required><br>
             <label for="phone">Número de teléfono</label><br>
             <input type="text" id="phone" name="phone" maxlength="10" title="Déjenos su número de teléfono para contactar con usted." required><br>
-            <label for="user">Usuario</label><br>
-            <input type="text" id="user" name="user" placeholder="usuario_123" autofocus maxlength="20" title="El nombre de usuario debe ser una palabra de 5 a 20 caracteres sin espacios pudiendo incluir &quot.&quot y &quot_&quot" required><br>
-            <label for="psswrd">Contraseña</label><br>
-            <input type="psswrd" name="psswrd" id="psswrd" placeholder="**********" title="La contraseña debe tener una longitud mínima de 8 caracteres y contener en ella una minúscula, una mayúscula, un número y un caracteres especial" required>
+            <label for="username">Usuario</label><br>
+            <input type="text" id="username" name="username" placeholder="usuario_123" autofocus maxlength="20" title="El nombre de usuario debe ser una palabra de 5 a 20 caracteres sin espacios pudiendo incluir &quot.&quot y &quot_&quot" required><br>
+            <label for="password">Contraseña</label><br>
+            <input type="password" name="password" id="password" placeholder="**********" title="La contraseña debe tener una longitud mínima de 8 caracteres y contener en ella una minúscula, una mayúscula, un número y un caracteres especial" required>
             <button type="submit" name="submit" id="submit" disabled>Enviar</button>
         </form>
     </main>
@@ -197,6 +192,6 @@ try {
 </html>
 
 <?php
-if (isset($error)) {
-    echo '<script type="text/javascript">alert("Alert message here")</script>';
+if (isset($newUser) && $newUser != 1) {
+    echo $newUser;
 }

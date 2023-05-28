@@ -12,11 +12,12 @@ class Session
     function registerNewUser($user, $name, $surname, $email, $phone, $birth, $psswd)
     {
         $userDAL = new User();
-        try {
-            $res = $userDAL->registerNewUser($user, $name, $surname, $email, $phone, $birth, $psswd, PROFILE);
-            return $res;
-        } catch (\Throwable $th) {
-            return false;
+        $res = $userDAL->registerNewUser($user, $name, $surname, $email, $phone, $birth, $psswd, PROFILE);
+
+        if ($res === false) {
+            $alert = '<script type="text/javascript">alert("Clave duplicada. Por favor, inténtalo de nuevo.");</script>';
+            return $alert;
         }
+        return $res;
     }
 }
