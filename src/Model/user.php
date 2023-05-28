@@ -12,6 +12,7 @@ class User
             return ("Could not connect to database:" . $e->getMessage());
         }
     }
+
     function registerNewUser($user, $name, $surname, $email, $phone, $birth, $psswd, $profile)
     {
         $connection = $this->connection();
@@ -27,6 +28,32 @@ class User
             } else {
                 throw $e;
             }
+        }
+    }
+
+    function verify($user, $psswrd)
+    {
+        $connection = $this->connection();
+        $stmt = mysqli_prepare($connection, "SELECT user_id, password, profile FROM user where user_id = ?;");
+        $sanitized_user = mysqli_real_escape_string($connection, $user);
+        $stmt->bind_param("s", $sanitized_user);
+        $stmt->execute();
+        $res = $stmt->get_result();
+
+        if ($res->num_rows == 0) {
+            return 'NOT_FOUND';
+        }
+
+        if ($res->num_rows > 1) {
+            return 'NOT_FOUND';
+        }
+
+        $myrow = $res->fetch_assoc();
+        $x = $myrow['password'];
+        if (password_verify($psswrd, $x)) {
+            return $myrow['profile'];
+        } else {
+            return 'NOT_FOUND';
         }
     }
 }
