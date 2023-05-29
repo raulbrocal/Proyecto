@@ -183,7 +183,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <footer>
         <div class="container">
-            <p class="text" style="text-align: center;">&copy; 2023 Crew Bar. All rights reserved.</p>
+            <p style="margin: auto;">&copy; 2023 Crew Bar. All rights reserved.</p>
         </div>
     </footer>
 

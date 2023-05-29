@@ -56,7 +56,8 @@
         }
 
         .container-xxl {
-            margin-top: 5%;
+            margin-top: 2.85%;
+            margin-bottom: 2.86%;
             width: 35%;
             max-width: 35%;
             display: flex;
@@ -257,7 +258,7 @@
 
     <footer>
         <div class="container">
-            <p class="text" style="text-align: center;">&copy; 2023 Crew Bar. All rights reserved.</p>
+            <p style="margin: auto;">&copy; 2023 Crew Bar. All rights reserved.</p>
         </div>
     </footer>
 

@@ -13,7 +13,7 @@ link[rel="icon"] {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 10px;
 }
 
 .title {
@@ -21,11 +21,7 @@ link[rel="icon"] {
     text-align: center;
     border-top: solid black 1px;
     border-bottom: solid black 1px;
-    margin-top: 50px;
-}
-
-section.container-fluid.title {
-    max-width: 100%;
+    margin-top: 5%;
 }
 
 h1 {
@@ -36,7 +32,7 @@ h1 {
     font-size: 18px;
     line-height: 1.5;
     color: black;
-    margin-bottom: 0px;
+    margin: 4% 0;
 }
 
 header {
@@ -48,17 +44,20 @@ header {
 .banner {
     background-size: cover;
     background-position: center;
-    height: 800px;
+    height: 90%;
     width: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #FFF;
+    margin-top: 2.8%;
+    margin-bottom: 2.8%;
 }
 
 .about {
     background-color: #F7F7F7;
-    height: 250px;
+    height: 180px;
+    margin-bottom: 2.8%;
 }
 
 .article {
@@ -94,8 +93,8 @@ button.btn:hover {
 footer {
     background-color: #f1f1f1;
     text-align: center;
-    position: fixed;
-    left: 0;
-    bottom: 0;
     width: 100%;
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 0;
 }

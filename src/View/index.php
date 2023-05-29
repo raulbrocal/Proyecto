@@ -104,10 +104,6 @@
         </div>
     </header>
 
-    <section class="container-fluid title">
-        <h1>Crew Bar</h1>
-    </section>
-
     <div class="container-xxl">
         <section class="banner">
             <div id="demo" class="carousel slide" data-bs-ride="carousel">
@@ -162,13 +158,13 @@
 
         </section>
 
-        <footer>
-            <div class="container">
-                <p class="text" style="text-align: center;">&copy; 2023 Crew Bar. All rights reserved.</p>
-            </div>
-        </footer>
-
     </div>
+
+    <footer>
+        <div class="container">
+            <p style="margin: auto;">&copy; 2023 Crew Bar. All rights reserved.</p>
+        </div>
+    </footer>
 
 </body>
 

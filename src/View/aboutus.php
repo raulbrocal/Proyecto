@@ -52,7 +52,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 10%;
+            margin-top: 7.5%;
+            margin-bottom: 7.5%;
         }
 
         #map {
@@ -77,7 +78,7 @@
 
         .title {
             background-color: #f8f9fa;
-            padding: 40px 0;
+            padding: 1%;
             text-align: center;
         }
 
@@ -198,15 +199,15 @@
             </ul>
         </div>
 
-        <footer>
-            <div class="container">
-                <p class="text" style="text-align: center;">&copy; 2023 Crew Bar. All rights reserved.</p>
-            </div>
-        </footer>
-
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8x2L4ypAtuKgz7xFc9jE9wlo0dgxq9cY&callback=initMap" defer></script>
 
     </div>
+
+    <footer>
+        <div class="container">
+            <p style="margin: auto;">&copy; 2023 Crew Bar. All rights reserved.</p>
+        </div>
+    </footer>
 
 </body>
 
