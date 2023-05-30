@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../js/login.js"></script>
     <style>
-        /* .toast-container {
+        .toast-container {
             z-index: 9999;
             top: 5.5%;
             right: 1px;
@@ -53,13 +53,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         .toast-body {
             margin-bottom: 10px;
-        } */
+        }
+
+        #video-playa {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
 
         main {
             width: 100%;
             max-width: 600px;
             margin: auto;
-            margin-top: 50px;
+            margin-top: 2.6%;
+            margin-bottom: 2.6%;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 1%;
+            padding: 2%;
         }
 
         h1 {
@@ -83,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             font-size: 18px;
             color: #000;
             padding: 7px 25px;
-            margin: 10px 0;
+            margin: 1% 0;
         }
 
         #submit {
@@ -106,7 +120,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-
+    <video id="video-playa" autoplay muted loop>
+        <source src="../../img/sea.mp4" type="video/mp4">
+    </video>
     <header>
         <nav class="navbar navbar-expand-lg navbar-scroll fixed-top shadow-0 border-bottom border-dark">
             <div class="container-fluid">
@@ -136,7 +152,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </div>
         </nav>
-        <!-- <div class="toast-container position-fixed">
+        <div class="toast-container position-fixed">
             <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
                     <strong class="me-auto">Inicio de sesión</strong>
@@ -157,7 +173,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </form>
                 </div>
             </div>
-        </div> -->
+        </div>
     </header>
 
     <main>
