@@ -5,33 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const appetizers = document.getElementById('appetizers');
     const desserts = document.getElementById('desserts');
 
-    // Obtener los botones de categoría
-    const beverageButton = document.createElement('a');
-    beverageButton.href = '#';
-    beverageButton.textContent = 'BEBIDAS';
-    beverageButton.classList.add('category-button');
-
-    const foodButton = document.createElement('a');
-    foodButton.href = '#';
-    foodButton.textContent = 'COMIDA';
-    foodButton.classList.add('category-button');
-
-    const appetizerButton = document.createElement('a');
-    appetizerButton.href = '#';
-    appetizerButton.textContent = 'ENTRANTES';
-    appetizerButton.classList.add('category-button');
-
-    const dessertButton = document.createElement('a');
-    dessertButton.href = '#';
-    dessertButton.style.marginRight = 0;
-    dessertButton.textContent = 'POSTRES';
-    dessertButton.classList.add('category-button');
-
-    const plateIconImg = document.createElement('img');
-    plateIconImg.src = '../../img/plateIcon.svg';
-    plateIconImg.alt = 'Plate Icon';
-    plateIconImg.classList.add('plate-icon');
-
     // Función para mostrar una categoría y ocultar las demás
     function showCategory(category) {
         beverages.style.display = 'none';
@@ -42,48 +15,21 @@ document.addEventListener('DOMContentLoaded', function () {
         category.style.display = 'block';
     }
 
-    // Event listeners para los botones de categoría
-    beverageButton.addEventListener('click', function () {
-        showCategory(beverages);
-        beverageButton.classList.add('active');
-        foodButton.classList.remove('active');
-        appetizerButton.classList.remove('active');
-        dessertButton.classList.remove('active');
+    // Event listener para los enlaces de categoría
+    const categoryLinks = document.querySelectorAll('.category-link');
+    categoryLinks.forEach(function (link) {
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
+            const targetCategory = document.getElementById(link.dataset.category);
+            showCategory(targetCategory);
+            categoryLinks.forEach(function (otherLink) {
+                otherLink.classList.remove('active');
+            });
+            link.classList.add('active');
+        });
     });
-
-    foodButton.addEventListener('click', function () {
-        showCategory(food);
-        beverageButton.classList.remove('active');
-        foodButton.classList.add('active');
-        appetizerButton.classList.remove('active');
-        dessertButton.classList.remove('active');
-    });
-
-    appetizerButton.addEventListener('click', function () {
-        showCategory(appetizers);
-        beverageButton.classList.remove('active');
-        foodButton.classList.remove('active');
-        appetizerButton.classList.add('active');
-        dessertButton.classList.remove('active');
-    });
-
-    dessertButton.addEventListener('click', function () {
-        showCategory(desserts);
-        beverageButton.classList.remove('active');
-        foodButton.classList.remove('active');
-        appetizerButton.classList.remove('active');
-        dessertButton.classList.add('active');
-    });
-
-    // Agregar los botones de categoría a la barra de navegación
-    const navbar = document.getElementById('navbarMenu');
-    navbar.appendChild(beverageButton);
-    navbar.appendChild(appetizerButton);
-    navbar.appendChild(foodButton);
-    navbar.appendChild(dessertButton);
-    navbar.insertBefore(plateIconImg, appetizerButton.nextSibling);
 
     // Mostrar la categoría de bebidas por defecto
     showCategory(beverages);
-    beverageButton.classList.add('active');
+    beverages.classList.add('active');
 });

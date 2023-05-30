@@ -16,12 +16,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../js/login.js"></script>
     <style>
-        .plate-icon {
-            width: 5%;
-            height: 5%;
-            margin-right: 100px;
-        }
-
         .toast-container {
             z-index: 9999;
             top: 5.5%;
@@ -52,27 +46,71 @@
             margin-bottom: 10px;
         }
 
+        #navbarMenu {
+            position: fixed;
+            top: 6.5%;
+            left: 0;
+            width: 100%;
+            background-color: rgba(200, 200, 200, 0.8);
+            z-index: 999;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .plate-icon {
+            width: 5%;
+            height: 5%;
+            margin-right: 5%;
+        }
+
+        .category-link {
+            display: inline-block;
+            position: relative;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #000;
+            transition: all 0.3s ease;
+            margin-right: 5%;
+        }
+
+        .category-link:last-child {
+            margin-right: 0;
+        }
+
+        .category-link::before,
+        .category-link::after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 4px;
+            background-color: #000;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .category-link::before {
+            left: -2%;
+        }
+
+        .category-link::after {
+            right: -10px;
+        }
+
+        .category-link:hover::before {
+            left: -20px;
+        }
+
+        .category-link:hover::after {
+            right: -20px;
+        }
+
+
         .category {
             margin: auto;
             width: 85%;
-        }
-
-        .category-button {
-            display: inline-block;
-            padding: 5px 10px;
-            margin-right: 100px;
-            background-color: #ccc;
-            text-decoration: none;
-            border-radius: 5px;
-            background-size: cover;
-            border-bottom: 1px solid transparent;
-            cursor: pointer;
-            width: 100px;
-            height: 50px;
-        }
-
-        .category-button.active {
-            border-bottom-color: #666;
         }
 
         .item {
@@ -85,36 +123,29 @@
             border-collapse: collapse;
             width: 100%;
             text-align: left;
+            padding-left: 4%;
         }
-
         #cuadrado {
             width: 30%;
             height: 150px;
-            background-color: #f1f1f1;
-        }
-
-        #titulo {
-            width: 100%;
-            border-radius: 15px;
-            background-color: lightgreen;
-            padding: 15px;
-            margin: 35px 0 45px 0;
-            border-bottom: #ccc 1px solid;
+            background-color: white;
+            padding-left: 0;
         }
 
         #objeto {
             width: 25%;
             border-radius: 5px;
             border-left: #666 solid 5px;
+            border-top: #666 solid 5px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             display: inline-block;
             margin: 50px 50px 50px 50px;
+            background-color: #f1f1f1;
         }
     </style>
 </head>
 
 <body>
-
     <header>
         <nav class="navbar navbar-expand-lg navbar-scroll fixed-top shadow-0 border-bottom border-dark">
             <div class="container-fluid">
@@ -170,42 +201,37 @@
 
     <main style="text-align: center;">
 
-        <div class="navbar navbar-expand-lg shadow-0 border-bottom border-top border-dark justify-content-center" id="navbarMenu">
+        <div id="navbarMenu">
+            <a href="#" class="category-link active" data-category="beverages">BEBIDAS</a>
+            <a href="#" class="category-link" data-category="appetizers">ENTRANTES</a>
+            <img src="../../img/plateIcon.svg" alt="PlateIcon" class="plate-icon">
+            <a href="#" class="category-link" data-category="food">COMIDA</a>
+            <a href="#" class="category-link" data-category="desserts">POSTRES</a>
         </div>
-
+        <br><br><br><br><br>
         <div id="main">
             <?php require_once(dirname(__DIR__) . "/Controller/Menu/drink.php"); ?>
             <div id="beverages" class="category">
-                <div id="titulo" style="background-color: lightcoral;">
-                    <h1>BEBIDAS</h1>
-                </div>
                 <?php $drinksBL = new Beverage();
                 $drinksBL->getDrinks() ?>
                 <br><br><br><br><br>
             </div>
             <?php require_once(dirname(__DIR__) . "/Controller/Menu/starters.php"); ?>
             <div id="appetizers" class="category">
-                <div id="titulo" style="background-color: lightgreen;">
-                    <h1>ENTRANTES</h1>
-                </div>
+                <h2>Entrantes</h2>
                 <?php $startersBL = new Appetizer();
                 $startersBL->getStarters() ?>
                 <br><br><br><br><br>
             </div>
             <?php require_once(dirname(__DIR__) . "/Controller/Menu/food.php"); ?>
             <div id="food" class="category">
-                <div id="titulo" style="background-color: lightblue;">
-                    <h1>COMIDAS</h1>
-                </div>
                 <?php $foodBL = new Meal();
                 $foodBL->getFoods() ?>
                 <br><br><br><br><br>
             </div>
             <?php require_once(dirname(__DIR__) . "/Controller/Menu/dessert.php"); ?>
             <div id="desserts" class="category">
-                <div id="titulo" style="background-color: lightyellow;">
-                    <h1>POSTRES</h1>
-                </div>
+                <h2>Postres</h2>
                 <?php $dessertBL = new Afters();
                 $dessertBL->getDesserts() ?>
                 <br><br><br><br><br>

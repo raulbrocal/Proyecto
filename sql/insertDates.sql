@@ -73,7 +73,7 @@ VALUES
 ('Tabulé', 'Ensalada libanesa de cuscús, tomate, pepino, cebolla, perejil, menta y limón', 7.50, 'entrante', 'frutos secos'),
 ('Hummus', 'Puré de garbanzos, tahini, aceite de oliva y limón', 6.00, 'entrante', 'sésamo'),
 ('Salmorejo', 'Sopa fría de tomate, pan, ajo, aceite de oliva y jamón serrano', 7.00, 'entrante', 'gluten, sulfitos'),
-('Queso frito con mermelada de tomate', 'Queso manchego frito con mermelada casera de tomate', 9.00, 'entrante', 'lácteos'),
+('Fingers de queso', 'Queso manchego frito con mermelada casera de tomate', 9.00, 'entrante', 'lácteos'),
 ('Tortilla de patatas', 'Tortilla de patatas con cebolla', 8.00, 'entrante', 'huevo'),
 ('Carpaccio de calabacín', 'Calabacín laminado con queso parmesano, rúcula y aceite de oliva', 9.50, 'entrante', 'lácteos'),
 ('Boquerones en vinagre', 'Boquerones marinados en vinagre y aceite de oliva', 7.50, 'entrante', 'pescado'),
