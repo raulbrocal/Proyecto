@@ -32,8 +32,6 @@ CREATE TABLE reservation (
     date DATE NOT NULL,
     time TIME NOT NULL,
     number_of_people INT(11) UNSIGNED NOT NULL,
-    indoor BOOLEAN NOT NULL DEFAULT TRUE,
-    comment VARCHAR(255),
     FOREIGN KEY (user_id)
         REFERENCES user (user_id)
 );
