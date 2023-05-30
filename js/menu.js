@@ -27,6 +27,11 @@ document.addEventListener('DOMContentLoaded', function () {
     dessertButton.textContent = 'POSTRES';
     dessertButton.classList.add('category-button');
 
+    const plateIconImg = document.createElement('img');
+    plateIconImg.src = '../../img/plateIcon.svg';
+    plateIconImg.alt = 'Plate Icon';
+    plateIconImg.classList.add('plate-icon');
+
     // Función para mostrar una categoría y ocultar las demás
     function showCategory(category) {
         beverages.style.display = 'none';
@@ -76,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
     navbar.appendChild(appetizerButton);
     navbar.appendChild(foodButton);
     navbar.appendChild(dessertButton);
+    navbar.insertBefore(plateIconImg, appetizerButton.nextSibling);
 
     // Mostrar la categoría de bebidas por defecto
     showCategory(beverages);

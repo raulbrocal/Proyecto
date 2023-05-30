@@ -16,6 +16,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../js/login.js"></script>
     <style>
+        .plate-icon {
+            width: 5%;
+            height: 5%;
+            margin-right: 100px;
+        }
+
         .toast-container {
             z-index: 9999;
             top: 5.5%;
