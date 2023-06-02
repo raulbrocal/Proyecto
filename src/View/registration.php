@@ -161,12 +161,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="toast-body">
                     <form method="POST" action="../Controller/login.php">
                         <div class="mb-3">
-                            <label for="username" class="form-label">Nombre de usuario</label>
-                            <input type="text" class="form-control" id="username" placeholder="Ingrese su nombre de usuario">
+                            <label for="user" class="form-label">Nombre de usuario</label>
+                            <input type="text" class="form-control" id="user" placeholder="Ingrese su nombre de usuario">
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="password" placeholder="Ingrese su contraseña">
+                            <label for="psswrd" class="form-label">Contraseña</label>
+                            <input type="psswrd" class="form-control" id="psswrd" placeholder="Ingrese su contraseña">
                         </div>
                         <button type="submit" class="btn btn-primary">Iniciar sesión</button>
                         <a class="btn btn-primary float-end" href="./registration.php" role="button">Registrate</a>

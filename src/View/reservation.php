@@ -1,3 +1,11 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    require_once("../Controller/reservation.php");
+    $reservationBL = new ReservationLogic;
+    $newReservation->makeReservation($userId, $scheduleId, $date, $time, $numberOfPeople);
+    $newReservation = $reservationBL->reserveTable($_SESSION["usernamme"], $_POST['date'], $_POST['time'], $_POST['people']);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +24,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../../js/login.js"></script>
+    <script src="../../js/login.js">
+    </script>
     <style>
         body {
             height: 100%;
@@ -173,10 +182,10 @@
             <h1 style="font-family: 'Lilita One', cursive;">RESERVA TU MESA YA</h1>
             <br>
             <div class="help-box">
-                <p>Para más ayuda en caso de tener alguna duda o pregunta, llama a <strong>+34 638 44 01 77</strong> o contacta con nosotros a través de nuestras redes sociales.</p>
+                <p>En caso de surgir alguna duda o pregunta, puede contactar con nosotros llamando al <strong>+34 638 44 01 77</strong> o contactar con nosotros a través de nuestras redes sociales.</p>
             </div>
             <br><br>
-            <form method="POST" action="../Controller/reservation.php">
+            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingOne">

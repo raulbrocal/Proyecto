@@ -8,14 +8,16 @@ class ReservationLogic
     {
     }
 
-    function registerNewReservation($user_id, $date, $time, $number_of_people)
+    public function reserveTable($userId, $startTime, $date, $numberOfPeople)
     {
-        $reservationDAL = new Reservation();
-        $res = $reservationDAL->insertReservation($user_id, $date, $time, $number_of_people);
-        if ($res === false) {
-            $alert = '<script type="text/javascript">alert("Clave duplicada. Por favor, inténtalo de nuevo.");</script>';
-            return $alert;
+        $resrvationDAL = new Reservation();
+        $res = $resrvationDAL->checkAvailability($numberOfPeople, $startTime);
+        if ($res) {
+            $resrvationDAL->updateAvailability($res);
+            $resrvationDAL->insertReservation($userId, $res, $date, $startTime, $numberOfPeople);
+            return true; // Reserva realizada exitosamente
+        } else {
+            return false; // No hay disponibilidad para la reserva
         }
-        return $res;
     }
 }

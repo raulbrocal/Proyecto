@@ -26,24 +26,31 @@ CREATE TABLE user (
     profile ENUM('CLIENT', 'EMPLOYEE') NOT NULL DEFAULT 'CLIENT'
 );
 
+CREATE TABLE dinnerTable (
+    number INT AUTO_INCREMENT PRIMARY KEY,
+    capacity INT NOT NULL
+);
+
+CREATE TABLE reservationSchedule (
+    schedule_id INT AUTO_INCREMENT PRIMARY KEY,
+    table_number INT,
+    start_time TIME,
+    availability BOOLEAN DEFAULT TRUE,
+    FOREIGN KEY (table_number)
+        REFERENCES dinnerTable (number)
+);
+
 CREATE TABLE reservation (
     reservation_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id VARCHAR(20),
+    schedule_id INT,
     date DATE NOT NULL,
     time TIME NOT NULL,
     number_of_people INT(11) UNSIGNED NOT NULL,
     FOREIGN KEY (user_id)
-        REFERENCES user (user_id)
-);
-
-CREATE TABLE dinnerTable (
-    number INT AUTO_INCREMENT PRIMARY KEY,
-    reservation_id INT,
-    available BOOLEAN,
-    description VARCHAR(255),
-    capacity INT NOT NULL,
-    FOREIGN KEY (reservation_id)
-        REFERENCES reservation (reservation_id)
+        REFERENCES user (user_id),
+    FOREIGN KEY (schedule_id)
+        REFERENCES reservationSchedule (schedule_id)
 );
 
 CREATE TABLE menu (
@@ -63,7 +70,7 @@ CREATE TABLE drink (
     ml INT(3) NOT NULL,
     price DECIMAL(10 , 2 ) NOT NULL,
     type VARCHAR(50) NOT NULL,
-    alcoholic BOOLEAN NOT NULL    
+    alcoholic BOOLEAN NOT NULL
 );
 
 CREATE TABLE dishes (
