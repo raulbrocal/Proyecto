@@ -145,7 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <a href="aboutus.php"><button type="button" class="btn">Sobre nosotros</button></a>
                         </li>
                         <li class="nav1-item">
-                            <a href="user.php"><button type="button" class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <a href="#"><button type="button" class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                                         <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
                                     </svg></button></a>
                         </li>
@@ -197,7 +197,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="accordion-body rounded">
                                 <div class="form-group">
-                                    <select class="form-control" id="personas" name="personas">
+                                    <select class="form-control" id="people" name="people">
                                         <option value="1">1 persona</option>
                                         <option value="2">2 personas</option>
                                         <option value="3">3 personas</option>
@@ -226,7 +226,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                             <div class="accordion-body rounded">
                                 <div class="form-group">
-                                    <input type="date" class="form-control" id="fecha" name="fecha">
+                                    <input type="date" class="form-control" id="date" name="date">
                                 </div>
                             </div>
                         </div>
@@ -243,7 +243,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                             <div class="accordion-body rounded">
                                 <div class="form-group">
-                                    <select class="form-control" id="hora" name="hora">
+                                    <select class="form-control" id="time" name="time">
                                         <option value="12:30">12:30</option>
                                         <option value="12:45">12:45</option>
                                         <option value="13:00">13:00</option>
