@@ -1,9 +1,18 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    require_once("../Controller/reservation.php");
-    $reservationBL = new ReservationLogic;
-    $newReservation->makeReservation($userId, $scheduleId, $date, $time, $numberOfPeople);
-    $newReservation = $reservationBL->reserveTable($_SESSION["usernamme"], $_POST['date'], $_POST['time'], $_POST['people']);
+if (isset($_POST['action'])) {
+    $action = $_POST['action'];
+    if ($action == "reserva" && isset($_COOKIE['session'])) {
+        require_once("../Controller/reservation.php");
+        $reservationBL = new ReservationLogic;
+        $newReservation = $reservationBL->reserveTable($_COOKIE['session'], $_POST['time'], $_POST['date'],  $_POST['people']);
+    } else if ($action == "login") {
+        require_once("../Controller/login.php");
+        $loginBL = new Login;
+        $res = $loginBL->login($_POST['username'], $_POST['password']);
+        if (!$res) {
+            $error = 'Credenciales inválidas. Por favor, inténtalo de nuevo.';
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -153,115 +162,119 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </div>
         </nav>
-        <div class="toast-container position-fixed">
-            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <strong class="me-auto">Inicio de sesión</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body">
-                    <form method="POST" action="../Controller/login.php">
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Nombre de usuario</label>
-                            <input type="text" class="form-control" id="username" placeholder="Ingrese su nombre de usuario">
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="password" placeholder="Ingrese su contraseña">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-                        <a class="btn btn-primary float-end" href="./registration.php" role="button">Registrate</a>
-                    </form>
-                </div>
-            </div>
-        </div>
     </header>
 
     <div class="container-xxl">
-        <div class="reservation-box">
-            <h1 style="font-family: 'Lilita One', cursive;">RESERVA TU MESA YA</h1>
-            <br>
-            <div class="help-box">
-                <p>En caso de surgir alguna duda o pregunta, puede contactar con nosotros llamando al <strong>+34 638 44 01 77</strong> o contactar con nosotros a través de nuestras redes sociales.</p>
-            </div>
-            <br><br>
-            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                <div class="accordion" id="accordionExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
-                                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
-                                </svg>&nbspComensales
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                            <div class="accordion-body rounded">
-                                <div class="form-group">
-                                    <select class="form-control" id="people" name="people">
-                                        <option value="1">1 persona</option>
-                                        <option value="2">2 personas</option>
-                                        <option value="3">3 personas</option>
-                                        <option value="4">4 personas</option>
-                                        <option value="5">5 personas</option>
-                                        <option value="6">6 personas</option>
-                                        <option value="7">7 personas</option>
-                                        <option value="8">8 personas</option>
-                                        <option value="9">9 personas</option>
-                                        <option value="10">10 personas</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-date-fill" viewBox="0 0 16 16">
-                                    <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zm5.402 9.746c.625 0 1.184-.484 1.184-1.18 0-.832-.527-1.23-1.16-1.23-.586 0-1.168.387-1.168 1.21 0 .817.543 1.2 1.144 1.2z" />
-                                    <path d="M16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-6.664-1.21c-1.11 0-1.656-.767-1.703-1.407h.683c.043.37.387.82 1.051.82.844 0 1.301-.848 1.305-2.164h-.027c-.153.414-.637.79-1.383.79-.852 0-1.676-.61-1.676-1.77 0-1.137.871-1.809 1.797-1.809 1.172 0 1.953.734 1.953 2.668 0 1.805-.742 2.871-2 2.871zm-2.89-5.435v5.332H5.77V8.079h-.012c-.29.156-.883.52-1.258.777V8.16a12.6 12.6 0 0 1 1.313-.805h.632z" />
-                                </svg>&nbspFecha
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <div class="accordion-body rounded">
-                                <div class="form-group">
-                                    <input type="date" class="form-control" id="date" name="date">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16">
-                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                                </svg>&nbspHora
-                            </button>
-                        </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                            <div class="accordion-body rounded">
-                                <div class="form-group">
-                                    <select class="form-control" id="time" name="time">
-                                        <option value="12:30">12:30</option>
-                                        <option value="12:45">12:45</option>
-                                        <option value="13:00">13:00</option>
-                                        <option value="13:15">13:15</option>
-                                        <option value="13:30">13:30</option>
-                                        <option value="13:45">13:45</option>
-                                        <option value="14:00">14:00</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <?php if (isset($_COOKIE['session'])) { ?>
+            <div class="reservation-box">
+                <h1 style="font-family: 'Lilita One', cursive;">RESERVA TU MESA YA</h1>
+                <br>
+                <div class="help-box">
+                    <p>En caso de surgir alguna duda o pregunta, puede contactar con nosotros llamando al <strong>+34 638 44 01 77</strong> o contactar con nosotros a través de nuestras redes sociales.</p>
                 </div>
+                <br><br>
+                <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+                                    </svg>&nbspComensales
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div class="accordion-body rounded">
+                                    <div class="form-group">
+                                        <select class="form-control" id="people" name="people" required>
+                                            <option value="1">1 persona</option>
+                                            <option value="2">2 personas</option>
+                                            <option value="3">3 personas</option>
+                                            <option value="4">4 personas</option>
+                                            <option value="5">5 personas</option>
+                                            <option value="6">6 personas</option>
+                                            <option value="7">7 personas</option>
+                                            <option value="8">8 personas</option>
+                                            <option value="9">9 personas</option>
+                                            <option value="10">10 personas</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-date-fill" viewBox="0 0 16 16">
+                                        <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zm5.402 9.746c.625 0 1.184-.484 1.184-1.18 0-.832-.527-1.23-1.16-1.23-.586 0-1.168.387-1.168 1.21 0 .817.543 1.2 1.144 1.2z" />
+                                        <path d="M16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-6.664-1.21c-1.11 0-1.656-.767-1.703-1.407h.683c.043.37.387.82 1.051.82.844 0 1.301-.848 1.305-2.164h-.027c-.153.414-.637.79-1.383.79-.852 0-1.676-.61-1.676-1.77 0-1.137.871-1.809 1.797-1.809 1.172 0 1.953.734 1.953 2.668 0 1.805-.742 2.871-2 2.871zm-2.89-5.435v5.332H5.77V8.079h-.012c-.29.156-.883.52-1.258.777V8.16a12.6 12.6 0 0 1 1.313-.805h.632z" />
+                                    </svg>&nbspFecha
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                <div class="accordion-body rounded">
+                                    <div class="form-group">
+                                        <input type="date" class="form-control" id="date" name="date" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                                    </svg>&nbspHora
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                <div class="accordion-body rounded">
+                                    <div class="form-group">
+                                        <select class="form-control" id="time" name="time" required>
+                                            <option value="12:30">12:30</option>
+                                            <option value="12:45">12:45</option>
+                                            <option value="13:00">13:00</option>
+                                            <option value="13:15">13:15</option>
+                                            <option value="13:30">13:30</option>
+                                            <option value="13:45">13:45</option>
+                                            <option value="14:00">14:00</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <input type="hidden" name="action" value="reserva">
+                    <br>
+                    <input type="submit" class="btn btn-info" value="Continuar">
+                </form>
+            </div>
+        <?php } else { ?>
+            <div class="reservation-box">
+                <h1 style="font-family: 'Lilita One', cursive;">INICIA SESIÓN PARA RESERVAR TU MESA</h1>
                 <br>
+                <div class="help-box">
+                    <p>Para poder realizar una reserva en nuestro sistema, primero debemos comprobar que estás registrado en nuestra base de datos. Por favor, inicie sesión o por el contrario registrese en nuestra página web.</p>
+                </div>
+                <br><br>
+                <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="username" hidden>Inicio de sesión</label>
+                        <input type="text" id="username" name="username" class="form-control" placeholder="Usuario" required />
+                    </div>
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="password" hidden>Contraseña</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required />
+                    </div>
+                    <input type="hidden" name="action" value="login">
+                    <input type="submit" class="btn btn-info" value="Iniciar sesión">
+                </form>
                 <br>
-                <button type="submit" class="btn btn-info">Continuar</button>
-            </form>
-        </div>
+                <div class="error"><?php echo isset($error) ? $error : ''; ?></div>
+            </div>
+        <?php } ?>
     </div>
 
 

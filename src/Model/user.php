@@ -40,11 +40,7 @@ class User
         $stmt->execute();
         $res = $stmt->get_result();
 
-        if ($res->num_rows == 0) {
-            return 'NOT_FOUND';
-        }
-
-        if ($res->num_rows > 1) {
+        if ($res->num_rows == 0 || $res->num_rows > 1) {
             return 'NOT_FOUND';
         }
 
