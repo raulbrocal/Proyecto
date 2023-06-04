@@ -13,11 +13,6 @@ class Session
     {
         $userDAL = new User();
         $res = $userDAL->registerNewUser($user, $name, $surname, $email, $phone, $birth, $psswd, PROFILE);
-
-        if ($res === false) {
-            $alert = '<script type="text/javascript">alert("Clave duplicada. Por favor, inténtalo de nuevo.");</script>';
-            return $alert;
-        }
         return $res;
     }
 

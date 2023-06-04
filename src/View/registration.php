@@ -1,5 +1,4 @@
 <?php
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!isset($_POST['action'])) {
         require_once("../Controller/session.php");
@@ -14,7 +13,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,43 +25,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="icon" href="../../img/logo.png">
     <link rel="stylesheet" href="../../css/style.css">
     <script src="../../js/registration.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../js/login.js"></script>
     <style>
-        .toast-container {
-            z-index: 9999;
-            top: 5.5%;
-            right: 1px;
-            transform: translate(-5.5%);
-            max-width: 300px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .toast {
-            background-color: #f8f9fa;
-            border: 1px solid #dcdcdc;
-            padding: 15px;
-            border-radius: 5px;
-        }
-
-        .toast-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-            border-radius: 5px;
-        }
-
-        .toast-body {
-            margin-bottom: 10px;
-        }
-
         #video-playa {
             position: fixed;
             top: 0;
@@ -74,12 +43,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             z-index: -1;
         }
 
-        main {
+        #main {
             width: 100%;
             max-width: 600px;
             margin: auto;
-            margin-top: 2.6%;
-            margin-bottom: 2.6%;
+            margin-top: 2.65%;
+            margin-bottom: 2.65%;
             background-color: rgba(255, 255, 255, 0.8);
             border-radius: 1%;
             padding: 2%;
@@ -124,6 +93,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             background-color: lightgray;
             color: white;
             margin-top: 5px;
+        }
+
+        div#error.toast-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        div#error.toast-container .toast {
+            position: relative;
+            min-width: 200px;
+            padding: .75rem 1rem;
+            border-radius: .25rem;
+            background-color: #000;
+            color: #fff;
+            pointer-events: auto;
+        }
+
+        div#error.toast-container .toast .btn-close {
+            position: absolute;
+            top: .25rem;
+            right: .5rem;
         }
     </style>
 </head>
@@ -214,29 +212,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <?php } ?>
             </div>
         </div>
-        </div>
     </header>
-
-    <main>
-        <h1>Únete a nosotros</h1>
-        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off">
-            <label for="name">Nombre</label><br>
-            <input type="text" id="name" name="name" placeholder="Nombre*" autofocus maxlength="20" required><br>
-            <label for="surname">Apellidos</label><br>
-            <input type="text" id="surname" name="surname" maxlength="60" required><br>
-            <label for="email">Email</label><br>
-            <input type="text" id="email" name="email" placeholder="hola@gmail.com" maxlength="250" required><br>
-            <label for="birth">Fecha de nacimiento</label><br>
-            <input type="date" id="birth" name="birth" max="2020-12-31" required><br>
-            <label for="phone">Número de teléfono</label><br>
-            <input type="text" id="phone" name="phone" maxlength="10" title="Déjenos su número de teléfono para contactar con usted." required><br>
-            <label for="username">Usuario</label><br>
-            <input type="text" id="username" name="username" placeholder="usuario_123" autofocus maxlength="20" title="El nombre de usuario debe ser una palabra de 5 a 20 caracteres sin espacios pudiendo incluir &quot.&quot y &quot_&quot" required><br>
-            <label for="password">Contraseña</label><br>
-            <input type="password" name="password" id="password" placeholder="**********" title="La contraseña debe tener una longitud mínima de 8 caracteres y contener en ella una minúscula, una mayúscula, un número y un caracteres especial" required>
-            <button type="submit" name="submit" id="submit" disabled>Enviar</button>
-        </form>
-    </main>
+    <div>
+        <?php if (isset($newUser)) { ?>
+            <div class="toast-container" id="error">
+                <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            Hello, world! This is a toast message.
+                        </div>
+                        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+        <div id="main">
+            <h1>Únete a nosotros</h1>
+            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off">
+                <label for="name">Nombre</label><br>
+                <input type="text" id="name" name="name" placeholder="Nombre*" autofocus maxlength="20" required><br>
+                <label for="surname">Apellidos</label><br>
+                <input type="text" id="surname" name="surname" maxlength="60" required><br>
+                <label for="email">Email</label><br>
+                <input type="text" id="email" name="email" placeholder="hola@gmail.com" maxlength="250" required><br>
+                <label for="birth">Fecha de nacimiento</label><br>
+                <input type="date" id="birth" name="birth" max="2020-12-31" required><br>
+                <label for="phone">Número de teléfono</label><br>
+                <input type="text" id="phone" name="phone" maxlength="10" title="Déjenos su número de teléfono para contactar con usted." required><br>
+                <label for="username">Usuario</label><br>
+                <input type="text" id="username" name="username" placeholder="usuario_123" autofocus maxlength="20" title="El nombre de usuario debe ser una palabra de 5 a 20 caracteres sin espacios pudiendo incluir &quot.&quot y &quot_&quot" required><br>
+                <label for="password">Contraseña</label><br>
+                <input type="password" name="password" id="password" placeholder="**********" title="La contraseña debe tener una longitud mínima de 8 caracteres y contener en ella una minúscula, una mayúscula, un número y un caracteres especial" required>
+                <button type="submit" name="submit" id="submit" disabled>Enviar</button>
+            </form>
+        </div>
+    </div>
 
     <footer>
         <div class="container">

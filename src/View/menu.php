@@ -87,15 +87,6 @@
             margin-bottom: 5px;
         }
 
-        table,
-        td,
-        tr {
-            border-collapse: collapse;
-            width: 100%;
-            text-align: left;
-            padding-left: 4%;
-        }
-
         #cuadrado {
             width: 30%;
             height: 150px;
