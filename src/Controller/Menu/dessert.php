@@ -26,9 +26,9 @@ class Afters
 
                 if (file_exists($imagePath)) {
                     $imageTag = $this->generateImageTag($imagePath, $dessert['name']);
-                    $output .= "<div id='objeto'><table><tbody><tr><td rowspan='4' id='cuadrado'>" . $imageTag . "</td><td><h3>" . $dessert['name'] . "</h3></td><tr><td colspan='2'>" . $dessert['description'] . "</td></tr><tr><td colspan='2'>" . ucfirst($dessert['allergens']) . "</td></tr><tr><td colspan='2' style='text-align:right'>" . $dessert['price'] . " €</td></tr></tbody></table></div>";
+                    $output .= "<div id='objeto'><table><tbody><tr><td rowspan='4' id='cuadrado'>" . $imageTag . "</td><td><h3>" . $dessert['name'] . "</h3></td><tr><td colspan='2'>" . $dessert['description'] . ".</td></tr><tr><td colspan='2'>" . ucfirst($dessert['allergens']) . "</td></tr><tr><td colspan='2' style='text-align:right'>" . $dessert['price'] . " €</td></tr></tbody></table></div>";
                 } else {
-                    $output .= "<div id='objeto'><table><tbody><tr><td rowspan='4' id='cuadrado'><img src='' alt='Error' style='max-width: 100%; height: auto;'/> <div>Error: Image not found</div></td><td><h3>" . $dessert['name'] . "</h3></td><tr><td colspan='2'>" . $dessert['description'] . "</td></tr><tr><td colspan='2'>" . ucfirst($dessert['allergens']) . "</td></tr><tr><td colspan='2' style='text-align:right'>" . $dessert['price'] . " €</td></tr></tbody></table></div>";
+                    $output .= "<div id='objeto'><table><tbody><tr><td rowspan='4' id='cuadrado'><img src='' alt='Error' style='max-width: 100%; height: auto;'/> <div>Error: Image not found</div></td><td><h3>" . $dessert['name'] . "</h3></td><tr><td colspan='2'>" . $dessert['description'] . ".</td></tr><tr><td colspan='2'>" . ucfirst($dessert['allergens']) . "</td></tr><tr><td colspan='2' style='text-align:right'>" . $dessert['price'] . " €</td></tr></tbody></table></div>";
                 }
             } catch (Exception $e) {
                 $output .= "<div id='objeto'><table><tbody><tr><td rowspan='4' id='cuadrado'><div>Error: " . $e->getMessage() . "</div></td></tr></tbody></table></div>";

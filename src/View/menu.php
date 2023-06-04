@@ -160,29 +160,42 @@
                                 <label for="psswrd" class="form-label">Contraseña</label>
                                 <input type="password" class="form-control" id="psswrd" name="psswrd" placeholder="Ingrese su contraseña">
                             </div>
-                            <input type="hidden" name="action" value="registration">
+                            <input type="hidden" name="action" value="login">
                             <button type="submit" class="btn btn-primary">Iniciar sesión</button>
                             <a class="btn btn-primary float-end" href="./registration.php" role="button">Registrate</a>
                         </form>
-
                     </div>
+                    <div class="error"><?php echo isset($error) ? $error : ''; ?></div>
                 <?php } else {
                     require_once("../Controller/session.php");
                     $userBL = new Session;
                     $userData = $userBL->getUserData($_COOKIE['session']);
-                    var_dump($userData);
                 ?>
                     <div class="toast-header">
-                        <strong class="me-auto">Bienvenido, <?php echo $nombreUsuario; ?></strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        <table class="table">
+                            <tr>
+                                <td><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                    </svg></td>
+                                <td><?php echo $userData['name'] . " " . $userData['surname']; ?></td>
+                                <td>
+                                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"><?php echo $userData['email']; ?></td>
+                            </tr>
+                        </table>
                     </div>
                     <div class="toast-body">
-                        <p><strong>Nombre:</strong> <?php echo $nombreCompleto; ?></p>
-                        <p><strong>Correo electrónico:</strong> <?php echo $correoElectronico; ?></p>
-                        <p><strong>Número de reservas:</strong> <?php echo $numeroReservas; ?></p>
-                        <p><strong>Fecha de cumpleaños:</strong> <?php echo $fechaCumpleanos; ?></p>
-                        <p><strong>Número de teléfono:</strong> <?php echo $numeroTelefono; ?></p>
+                        <p><strong>Número de reservas:</strong> 1</p>
+                        <p><strong>Fecha de cumpleaños:</strong> <?php echo $userData['birth_date']; ?></p>
+                        <p><strong>Número de teléfono:</strong> <?php echo $userData['phone']; ?></p>
                     </div>
+                    <a class="btn btn-primary" href="../Controller/logout.php" role="button">Cerrar Sesión</a>
+                    <a class="btn btn-primary float-end" href="./reservation.php" role="button">Reserva ya</a>
                 <?php } ?>
             </div>
         </div>
