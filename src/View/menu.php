@@ -16,36 +16,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../js/login.js"></script>
     <style>
-        .toast-container {
-            z-index: 9999;
-            top: 5.5%;
-            right: 1px;
-            transform: translate(-5.5%);
-            max-width: 300px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .toast {
-            background-color: #f8f9fa;
-            border: 1px solid #dcdcdc;
-            padding: 15px;
-            border-radius: 5px;
-        }
-
-        .toast-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-            border-radius: 5px;
-        }
-
-        .toast-body {
-            margin-bottom: 10px;
-        }
-
         #navbarMenu {
             position: fixed;
             top: 6.5%;
@@ -125,6 +95,7 @@
             text-align: left;
             padding-left: 4%;
         }
+
         #cuadrado {
             width: 30%;
             height: 150px;
@@ -177,24 +148,45 @@
         </nav>
         <div class="toast-container position-fixed">
             <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <strong class="me-auto">Inicio de sesión</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body">
-                    <form method="POST" action="../Controller/login.php">
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Nombre de usuario</label>
-                            <input type="text" class="form-control" id="username" placeholder="Ingrese su nombre de usuario">
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="password" placeholder="Ingrese su contraseña">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-                        <a class="btn btn-primary float-end" href="./registration.php" role="button">Registrate</a>
-                    </form>
-                </div>
+                <?php if (!isset($_COOKIE['session'])) { ?>
+                    <div class="toast-header">
+                        <strong class="me-auto">Inicio de sesión</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                            <div class="mb-3">
+                                <label for="user" class="form-label">Nombre de usuario</label>
+                                <input type="text" class="form-control" id="user" name="user" placeholder="Ingrese su nombre de usuario">
+                            </div>
+                            <div class="mb-3">
+                                <label for="psswrd" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="psswrd" name="psswrd" placeholder="Ingrese su contraseña">
+                            </div>
+                            <input type="hidden" name="action" value="registration">
+                            <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                            <a class="btn btn-primary float-end" href="./registration.php" role="button">Registrate</a>
+                        </form>
+
+                    </div>
+                <?php } else {
+                    require_once("../Controller/session.php");
+                    $userBL = new Session;
+                    $userData = $userBL->getUserData($_COOKIE['session']);
+                    var_dump($userData);
+                ?>
+                    <div class="toast-header">
+                        <strong class="me-auto">Bienvenido, <?php echo $nombreUsuario; ?></strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        <p><strong>Nombre:</strong> <?php echo $nombreCompleto; ?></p>
+                        <p><strong>Correo electrónico:</strong> <?php echo $correoElectronico; ?></p>
+                        <p><strong>Número de reservas:</strong> <?php echo $numeroReservas; ?></p>
+                        <p><strong>Fecha de cumpleaños:</strong> <?php echo $fechaCumpleanos; ?></p>
+                        <p><strong>Número de teléfono:</strong> <?php echo $numeroTelefono; ?></p>
+                    </div>
+                <?php } ?>
             </div>
         </div>
     </header>

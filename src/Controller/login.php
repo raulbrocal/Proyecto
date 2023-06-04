@@ -8,8 +8,9 @@ class Login
             $cookieParams = session_get_cookie_params();
             $secure = true; // Indica que la cookie solo se enviará a través de conexiones HTTPS
             $httponly = true; // Indica que la cookie no será accesible desde scripts del lado cliente
-            setcookie('session', $user, time() + 3600, $cookieParams['path'], $cookieParams['domain'], $secure, $httponly);
-            header("Location: ../View/reservation.php");
+            setcookie('session', $user, time() + 86400, $cookieParams['path'], $cookieParams['domain'], $secure, $httponly);
+            $referer = $_SERVER['HTTP_REFERER'];
+            header("Location: $referer");
             exit();
         } else {
             return false;

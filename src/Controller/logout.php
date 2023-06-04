@@ -1,18 +1,8 @@
 <?php
-session_start();
-$_SESSION = array(); // Destruir todas las variables de sesión.
-if (ini_get("session.use_cookies")) {
-    $params = session_get_cookie_params();
-    setcookie(
-        session_name(),
-        '',
-        time() - 42000,
-        $params["path"],
-        $params["domain"],
-        $params["secure"],
-        $params["httponly"]
-    );
-}
-session_destroy();
+$cookieParams = session_get_cookie_params();
 
-header("Location: loginVista.php");
+setcookie('session', '', time() - 1, $cookieParams['path'], $cookieParams['domain'], true, true);
+
+$referer = $_SERVER['HTTP_REFERER'];
+header("Location: $referer");
+exit();

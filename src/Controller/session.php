@@ -20,4 +20,11 @@ class Session
         }
         return $res;
     }
+
+    function getUserData($user)
+    {
+        $userDAL = new User();
+        $res = $userDAL->getUser($user);
+        return $res;
+    }
 }

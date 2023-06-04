@@ -1,14 +1,21 @@
 <?php
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
-    if ($action == "reserva" && isset($_COOKIE['session'])) {
+    if ($action == "reservation" && isset($_COOKIE['session'])) {
         require_once("../Controller/reservation.php");
         $reservationBL = new ReservationLogic;
         $newReservation = $reservationBL->reserveTable($_COOKIE['session'], $_POST['time'], $_POST['date'],  $_POST['people']);
     } else if ($action == "login") {
         require_once("../Controller/login.php");
         $loginBL = new Login;
-        $res = $loginBL->login($_POST['username'], $_POST['password']);
+        if (isset($_POST['username']) && isset($_POST['password'])) {
+            $user = $_POST['username'];
+            $psswrd = $_POST['password'];
+        } else {
+            $user = $_POST['user'];
+            $psswrd = $_POST['psswrd'];
+        }
+        $res = $loginBL->login($user, $psswrd);
         if (!$res) {
             $error = 'Credenciales inválidas. Por favor, inténtalo de nuevo.';
         }
@@ -41,36 +48,6 @@ if (isset($_POST['action'])) {
             background-image: url(../../img/reservation.jpg);
             background-size: cover;
             background-position: center;
-        }
-
-        .toast-container {
-            z-index: 9999;
-            top: 5.5%;
-            right: 1px;
-            transform: translate(-5.5%);
-            max-width: 300px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .toast {
-            background-color: #f8f9fa;
-            border: 1px solid #dcdcdc;
-            padding: 15px;
-            border-radius: 5px;
-        }
-
-        .toast-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-            border-radius: 5px;
-        }
-
-        .toast-body {
-            margin-bottom: 10px;
         }
 
         .container-xxl {
@@ -154,14 +131,70 @@ if (isset($_POST['action'])) {
                             <a href="aboutus.php"><button type="button" class="btn">Sobre nosotros</button></a>
                         </li>
                         <li class="nav1-item">
-                            <a href="#"><button type="button" class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-                                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
-                                    </svg></button></a>
+                            <button type="button" class="btn" id="liveToastBtn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                </svg></button>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
+        <div class="toast-container position-fixed">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <?php if (!isset($_COOKIE['session'])) { ?>
+                    <div class="toast-header">
+                        <strong class="me-auto">Inicio de sesión</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                            <div class="mb-3">
+                                <label for="user" class="form-label">Nombre de usuario</label>
+                                <input type="text" class="form-control" id="user" name="user" placeholder="Ingrese su nombre de usuario">
+                            </div>
+                            <div class="mb-3">
+                                <label for="psswrd" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="psswrd" name="psswrd" placeholder="Ingrese su contraseña">
+                            </div>
+                            <input type="hidden" name="action" value="login">
+                            <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                            <a class="btn btn-primary float-end" href="./registration.php" role="button">Registrate</a>
+                        </form>
+
+                    </div>
+                <?php } else {
+                    require_once("../Controller/session.php");
+                    $userBL = new Session;
+                    $userData = $userBL->getUserData($_COOKIE['session']);
+                ?>
+                    <div class="toast-header">
+                        <table class="table">
+                            <tr>
+                                <td><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                    </svg></td>
+                                <td><?php echo $userData['name'] . " " . $userData['surname']; ?></td>
+                                <td>
+                                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"><?php echo $userData['email']; ?></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="toast-body">
+                        <p><strong>Número de reservas:</strong> 1</p>
+                        <p><strong>Fecha de cumpleaños:</strong> <?php echo $userData['birth_date']; ?></p>
+                        <p><strong>Número de teléfono:</strong> <?php echo $userData['phone']; ?></p>
+                    </div>
+                    <a class="btn btn-primary" href="../Controller/logout.php" role="button">Cerrar Sesión</a>
+                    <a class="btn btn-primary float-end" href="./reservation.php" role="button">Reserva ya</a>
+                <?php } ?>
+            </div>
+        </div>
     </header>
 
     <div class="container-xxl">
@@ -246,7 +279,7 @@ if (isset($_POST['action'])) {
                         </div>
                     </div>
                     <br>
-                    <input type="hidden" name="action" value="reserva">
+                    <input type="hidden" name="action" value="reservation">
                     <br>
                     <input type="submit" class="btn btn-info" value="Continuar">
                 </form>

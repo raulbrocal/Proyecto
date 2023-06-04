@@ -1,9 +1,18 @@
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    require_once("../Controller/session.php");
-    $userBL = new Session;
-    $newUser = $userBL->registerNewUser($_POST['username'], $_POST['name'], $_POST['surname'], $_POST['email'], $_POST['phone'], $_POST['birth'], $_POST['password']);
+    if (!isset($_POST['action'])) {
+        require_once("../Controller/session.php");
+        $userBL = new Session;
+        $newUser = $userBL->registerNewUser($_POST['username'], $_POST['name'], $_POST['surname'], $_POST['email'], $_POST['phone'], $_POST['birth'], $_POST['password']);
+    } else {
+        require_once("../Controller/login.php");
+        $loginBL = new Login;
+        $res = $loginBL->login($_POST['user'], $_POST['psswrd']);
+        if (!$res) {
+            $error = 'Credenciales inválidas. Por favor, inténtalo de nuevo.';
+        }
+    }
 }
 
 ?>
@@ -154,25 +163,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </nav>
         <div class="toast-container position-fixed">
             <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <strong class="me-auto">Inicio de sesión</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body">
-                    <form method="POST" action="../Controller/login.php">
-                        <div class="mb-3">
-                            <label for="user" class="form-label">Nombre de usuario</label>
-                            <input type="text" class="form-control" id="user" placeholder="Ingrese su nombre de usuario">
-                        </div>
-                        <div class="mb-3">
-                            <label for="psswrd" class="form-label">Contraseña</label>
-                            <input type="psswrd" class="form-control" id="psswrd" placeholder="Ingrese su contraseña">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-                        <a class="btn btn-primary float-end" href="./registration.php" role="button">Registrate</a>
-                    </form>
-                </div>
+                <?php if (!isset($_COOKIE['session'])) { ?>
+                    <div class="toast-header">
+                        <strong class="me-auto">Inicio de sesión</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                            <div class="mb-3">
+                                <label for="user" class="form-label">Nombre de usuario</label>
+                                <input type="text" class="form-control" id="user" name="user" placeholder="Ingrese su nombre de usuario">
+                            </div>
+                            <div class="mb-3">
+                                <label for="psswrd" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="psswrd" name="psswrd" placeholder="Ingrese su contraseña">
+                            </div>
+                            <input type="hidden" name="action" value="login">
+                            <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                            <a class="btn btn-primary float-end" href="./registration.php" role="button">Registrate</a>
+                        </form>
+                    </div>
+                    <div class="error"><?php echo isset($error) ? $error : ''; ?></div>
+                <?php } else {
+                    require_once("../Controller/session.php");
+                    $userBL = new Session;
+                    $userData = $userBL->getUserData($_COOKIE['session']);
+                ?>
+                    <div class="toast-header">
+                        <table class="table">
+                            <tr>
+                                <td><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                    </svg></td>
+                                <td><?php echo $userData['name'] . " " . $userData['surname']; ?></td>
+                                <td>
+                                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"><?php echo $userData['email']; ?></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="toast-body">
+                        <p><strong>Número de reservas:</strong> 1</p>
+                        <p><strong>Fecha de cumpleaños:</strong> <?php echo $userData['birth_date']; ?></p>
+                        <p><strong>Número de teléfono:</strong> <?php echo $userData['phone']; ?></p>
+                    </div>
+                    <a class="btn btn-primary" href="../Controller/logout.php" role="button">Cerrar Sesión</a>
+                    <a class="btn btn-primary float-end" href="./reservation.php" role="button">Reserva ya</a>
+                <?php } ?>
             </div>
+        </div>
         </div>
     </header>
 
@@ -206,8 +250,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </body>
 
 </html>
-
-<?php
-if (isset($newUser) && $newUser != 1) {
-    echo $newUser;
-}

@@ -16,6 +16,36 @@ link[rel="icon"] {
     padding: 10px;
 }
 
+.toast-container {
+    z-index: 9999;
+    top: 5.5%;
+    right: 1px;
+    transform: translate(-5.5%);
+    max-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.toast {
+    background-color: #f8f9fa;
+    border: 1px solid #dcdcdc;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.toast-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    border-radius: 5px;
+}
+
+.toast-body {
+    margin-bottom: 10px;
+}
+
 .title {
     background-color: #F7F7F7;
     text-align: center;
