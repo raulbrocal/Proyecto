@@ -53,17 +53,6 @@ CREATE TABLE reservation (
         REFERENCES reservationSchedule (schedule_id)
 );
 
-CREATE TABLE menu (
-    menu_id INT AUTO_INCREMENT PRIMARY KEY,
-    price DECIMAL(8 , 2 ) NOT NULL,
-    number_id INT NOT NULL,
-    drink_id INT,
-    dishes_id INT,
-    dessert_id INT,
-    FOREIGN KEY (number_id)
-        REFERENCES dinnerTable (number)
-);
-
 CREATE TABLE drink (
     drink_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -88,6 +77,17 @@ CREATE TABLE dessert (
     description VARCHAR(255),
     price DECIMAL(10 , 2 ) NOT NULL,
     allergens VARCHAR(50) NOT NULL
+);
+
+/*CREATE TABLE menu (
+    menu_id INT AUTO_INCREMENT PRIMARY KEY,
+    price DECIMAL(8 , 2 ) NOT NULL,
+    number_id INT NOT NULL,
+    drink_id INT,
+    dishes_id INT,
+    dessert_id INT,
+    FOREIGN KEY (number_id)
+        REFERENCES dinnerTable (number)
 );
 
 CREATE TABLE menuDrink (
