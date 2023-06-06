@@ -34,8 +34,8 @@ CREATE TABLE dinnerTable (
 CREATE TABLE reservationSchedule (
     schedule_id INT AUTO_INCREMENT PRIMARY KEY,
     table_number INT,
-    start_time TIME,
-    availability BOOLEAN DEFAULT TRUE,
+    time TIME,
+    date DATE NOT NULL,
     FOREIGN KEY (table_number)
         REFERENCES dinnerTable (number)
 );
@@ -44,14 +44,14 @@ CREATE TABLE reservation (
     reservation_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id VARCHAR(20),
     schedule_id INT,
-    date DATE NOT NULL,
-    time TIME NOT NULL,
     number_of_people INT(11) UNSIGNED NOT NULL,
     FOREIGN KEY (user_id)
         REFERENCES user (user_id),
     FOREIGN KEY (schedule_id)
         REFERENCES reservationSchedule (schedule_id)
+        ON DELETE CASCADE
 );
+
 
 CREATE TABLE drink (
     drink_id INT AUTO_INCREMENT PRIMARY KEY,

@@ -4,7 +4,7 @@ require_once("connection.php");
 
 class Reservation
 {
-    public function connection()
+    function connection()
     {
         try {
             return mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
@@ -13,46 +13,72 @@ class Reservation
         }
     }
 
-    function checkAvailability($numberOfPeople, $startTime)
+    function checkAvailability($date, $time, $tableNumber)
     {
         $connection = $this->connection();
-        $query = "SELECT rs.schedule_id FROM reservationSchedule rs LEFT JOIN dinnerTable dt ON dt.number = rs.table_number WHERE dt.capacity >= ? AND rs.start_time >= ? LIMIT 1;";
 
+        $query = "SELECT * FROM reservationSchedule WHERE date = ? AND time = ? AND table_number = ?";
         $stmt = mysqli_prepare($connection, $query);
-        mysqli_stmt_bind_param($stmt, "is", $numberOfPeople, $startTime);
+        mysqli_stmt_bind_param($stmt, "ssi", $date, $time, $tableNumber);
         mysqli_stmt_execute($stmt);
         $res = mysqli_stmt_get_result($stmt);
 
         if (mysqli_num_rows($res) > 0) {
-            $row = mysqli_fetch_assoc($res);
-            return $row['schedule_id']; // Devuelve el número de mesa disponible
-        } else {
-            return false; // No hay mesas disponibles
+            return false; // No se puede realizar la reserva, la mesa está ocupada en esa fecha y hora
         }
+
+        // Realizar inserción en la tabla reservationSchedule
+        $insertedID = $this->insertReservationSchedule($tableNumber, $time, $date);
+        mysqli_close($connection);
+        return $insertedID; // Devolver el ID de la fila recién insertada
     }
 
-    function updateAvailability($scheduleID)
+
+
+    function getTables($numberOfPeople)
     {
         $connection = $this->connection();
-        // Cambiar availability a false
-        $updateQuery = "UPDATE reservationSchedule SET availability = FALSE WHERE schedule_id = ?";
 
-        $stmt = mysqli_prepare($connection, $updateQuery);
-        mysqli_stmt_bind_param($stmt, "i", $scheduleID);
+        $query = "SELECT number FROM dinnerTable WHERE capacity >= ? ORDER BY capacity ASC";
+        $stmt = mysqli_prepare($connection, $query);
+        mysqli_stmt_bind_param($stmt, "i", $numberOfPeople);
         mysqli_stmt_execute($stmt);
+        $res = mysqli_stmt_get_result($stmt);
+
+        $tables = array();
+        while ($row = mysqli_fetch_assoc($res)) {
+            $tables[] = $row['number'];
+        }
+
+        return $tables;
+    }
+
+
+    function insertReservationSchedule($tableNumber, $time, $date)
+    {
+        $connection = $this->connection();
+
+        $query = "INSERT INTO reservationSchedule (table_number, time, date) VALUES (?, ?, ?)";
+        $stmt = mysqli_prepare($connection, $query);
+        mysqli_stmt_bind_param($stmt, "iss", $tableNumber, $time, $date);
+        mysqli_stmt_execute($stmt);
+
+        $insertedID = mysqli_stmt_insert_id($stmt); // Obtener el ID de la fila recién insertada
 
         mysqli_stmt_close($stmt);
         mysqli_close($connection);
+
+        return $insertedID;
     }
 
-    function insertReservation($userId, $scheduleId, $date, $startTime, $numberOfPeople)
+    function insertReservation($userId, $scheduleId, $numberOfPeople)
     {
         $connection = $this->connection();
         // Insertar la reserva en la tabla reservation
-        $insertQuery = "INSERT INTO reservation (user_id, schedule_id, date, time, number_of_people)
-                    VALUES (?, ?, ?, ?, ?)";
+        $insertQuery = "INSERT INTO reservation (user_id, schedule_id, number_of_people)
+                    VALUES (?, ?, ?)";
         $stmt = mysqli_prepare($connection, $insertQuery);
-        mysqli_stmt_bind_param($stmt, "sissi", $userId, $scheduleId, $date, $startTime, $numberOfPeople);
+        mysqli_stmt_bind_param($stmt, "sii", $userId, $scheduleId, $numberOfPeople);
         mysqli_stmt_execute($stmt);
 
         mysqli_stmt_close($stmt);

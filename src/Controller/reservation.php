@@ -8,16 +8,28 @@ class ReservationLogic
     {
     }
 
-    public function reserveTable($userId, $startTime, $date, $numberOfPeople)
+    function reserveTable($userId, $time, $date, $numberOfPeople)
     {
-        $resrvationDAL = new Reservation();
-        $res = $resrvationDAL->checkAvailability($numberOfPeople, $startTime);
-        if ($res) {
-            $resrvationDAL->updateAvailability($res);
-            $resrvationDAL->insertReservation($userId, $res, $date, $startTime, $numberOfPeople);
+        $reservationDAL = new Reservation();
+        $tables = $reservationDAL->getTables($numberOfPeople);
+        $scheduleID = null;
+
+        foreach ($tables as $tableNumber) {
+            $availability = $reservationDAL->checkAvailability($date, $time, $tableNumber);
+            if ($availability !== false) {
+                $scheduleID = $availability;
+                break;
+            }
+        }
+
+        // Obtener la hora actual
+        $currentTime = date('H:i');
+
+        if ($scheduleID !== null && !($date == date('Y-m-d') && $time < $currentTime)) {
+            $reservationDAL->insertReservation($userId, $scheduleID, $numberOfPeople);
             return true; // Reserva realizada exitosamente
         } else {
-            return false; // No hay disponibilidad para la reserva
+            return false; // No hay disponibilidad para la reserva o tiempo incorrecto
         }
     }
 }

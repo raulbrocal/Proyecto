@@ -40,8 +40,8 @@ if (isset($_POST['action'])) {
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../../js/login.js">
-    </script>
+    <script src="../../js/login.js"></script>
+    <script src="../../js/reservation.js"></script>
     <style>
         body {
             height: 100%;
@@ -224,8 +224,6 @@ if (isset($_POST['action'])) {
                                             <option value="6">6 personas</option>
                                             <option value="7">7 personas</option>
                                             <option value="8">8 personas</option>
-                                            <option value="9">9 personas</option>
-                                            <option value="10">10 personas</option>
                                         </select>
                                     </div>
                                 </div>
@@ -262,13 +260,14 @@ if (isset($_POST['action'])) {
                                 <div class="accordion-body rounded">
                                     <div class="form-group">
                                         <select class="form-control" id="time" name="time" required>
+                                            <option value="12:00">12:00</option>
                                             <option value="12:30">12:30</option>
-                                            <option value="12:45">12:45</option>
                                             <option value="13:00">13:00</option>
-                                            <option value="13:15">13:15</option>
                                             <option value="13:30">13:30</option>
-                                            <option value="13:45">13:45</option>
-                                            <option value="14:00">14:00</option>
+                                            <option value="14:00">14:30</option>
+                                            <option value="15:00">15:00</option>
+                                            <option value="15:30">15:30</option>
+                                            <option value="16:00">16:00</option>
                                         </select>
                                     </div>
                                 </div>
