@@ -17,7 +17,7 @@ class Reservation
     {
         $connection = $this->connection();
 
-        $query = "SELECT * FROM reservationSchedule WHERE date = ? AND time = ? AND table_number = ?";
+        $query = "SELECT schedule_id, table_number, time, date FROM reservationSchedule WHERE date = ? AND time = ? AND table_number = ?";
         $stmt = mysqli_prepare($connection, $query);
         mysqli_stmt_bind_param($stmt, "ssi", $date, $time, $tableNumber);
         mysqli_stmt_execute($stmt);
