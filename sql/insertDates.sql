@@ -1,7 +1,7 @@
 USE restaurantDB;
 -- Información del restaurante
-INSERT INTO restaurant (name, address, city, country, phone, email, social, closing_day, opening_time, closing_time)
-VALUES ("Crew Bar","Carrer Platja n3", "Port Adriano", "Islas Baleares", 638440177, "crewbar@gmail.com","@crewbar", 7, "08:00:00", "22:00:00");
+INSERT INTO restaurant (name, address, city, country, phone, email, closing_day, opening_time, closing_time)
+VALUES ("Crew Bar","Carrer Platja n3", "Port Adriano", "Islas Baleares", 638440177, "crewbar@gmail.com", "Domingo", "08:00", "22:00");
 
 -- Mesas en el restaurante
 INSERT INTO dinnerTable (capacity)
@@ -105,7 +105,6 @@ VALUES
 ("Tacos de pescado", "Tacos de pescado con salsa de aguacate y cilantro", 11.99, "pescado", "contiene lácteos"),
 ("Rodaballo al horno", "Rodaballo al horno con patatas y cebolla", 21.99, "pescado", "sin alérgenos"),
 ("Brocheta de langostinos", "Brocheta de langostinos a la parrilla con verduras", 19.50, "pescado", "sin alérgenos"),
-("Gazpacho de melón con langostinos", "Gazpacho de melón con langostinos y jamón serrano", 12.99, "pescado", "contiene lácteos"),("Margarita", "Salsa de tomate, mozzarella y albahaca", 9.99, "pizza", "Gluten"),
 ("Hawaiana", "Salsa de tomate, mozzarella, jamón y piña", 11.99, "pizza", "Gluten, lactosa"),
 ("Pepperoni", "Salsa de tomate, mozzarella y pepperoni", 10.99, "pizza", "Gluten, lactosa"),
 ("Cuatro quesos", "Salsa de tomate, mozzarella, gorgonzola, parmesano y provolone", 12.99, "pizza", "Gluten, lactosa"),

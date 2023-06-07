@@ -1,10 +1,14 @@
 <?php
+require_once("../Controller/info.php");
+$infoBL = new RestaurantInfo;
+$info = $infoBL->getRestaurantData();
+
 if (isset($_POST['action']) && $_POST['action'] == "login") {
     require_once("../Controller/login.php");
     $loginBL = new Login;
     $res = $loginBL->login($_POST['user'], $_POST['psswrd']);
     if (!$res) {
-        $error = 'Credenciales inválidas. Por favor, inténtalo de nuevo.';
+        $error = 'Usuario y/o contraseña incorrectas. Por favor, inténtalo de nuevo.';
     }
 }
 ?>
@@ -14,7 +18,7 @@ if (isset($_POST['action']) && $_POST['action'] == "login") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Crew Bar</title>
+    <title><?php echo $info['name'] ?></title>
     <link rel="icon" href="../../img/logo.png">
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,6 +37,7 @@ if (isset($_POST['action']) && $_POST['action'] == "login") {
             height: 500px;
             width: 100%;
             margin-top: 5%;
+            margin-bottom: 5%;
         }
 
         .info {
@@ -56,9 +61,8 @@ if (isset($_POST['action']) && $_POST['action'] == "login") {
     <header>
         <nav class="navbar navbar-expand-lg navbar-scroll fixed-top shadow-0 border-bottom border-dark">
             <div class="container-fluid">
-                &nbsp
                 <a class="navbar-brand" href="index.php"><img src="../../img/logo.png" alt="logo" style="max-height: 100%;"></a>
-                <h1 style="color: #F7F7F7;">Crew Bar</h1>
+                <h1 style="color: #F7F7F7;"><?php echo $info['name'] ?></h1>
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
@@ -103,7 +107,6 @@ if (isset($_POST['action']) && $_POST['action'] == "login") {
                             <a class="btn btn-primary float-end" href="./registration.php" role="button">Registrate</a>
                         </form>
                     </div>
-                    <div class="error"><?php echo isset($error) ? $error : ''; ?></div>
                 <?php } else {
                     require_once("../Controller/session.php");
                     $userBL = new Session;
@@ -178,27 +181,16 @@ if (isset($_POST['action']) && $_POST['action'] == "login") {
 
         <section class="about">
             <div class="article">
-                <h3 class="title">Our Chef</h3>
-                <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.
-                    Aliquam erat volutpat.</p>
+                <h3 class="title">Horario</h3>
+                <br>
+                <p><strong>Abierto:</strong> <?php echo $info["closing_day"] ?> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<strong>Horario:</strong> <?php echo $info["opening_time"] ?>h - <?php echo $info["closing_time"] ?>h</p>
             </div>
             <div class="article">
-                <h3 class="title">The Restaurant</h3>
-                <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.
-                    Aliquam erat volutpat.</p>
+                <h3 class="title">Bienvenido al restaurante</h3>
+                <p style="margin-top: 5%;">Todo un lugar acogedor y especial para disfrutar de momentos únicos. <br>
+                    Te esperamos con los brazos bien abiertos.</p>
             </div>
             <div class="article">
-                <h3 class="title">Our Menu</h3>
-                <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.
-                    Aliquam erat volutpat.</p>
-            </div>
-
-        </section>
-
-        <div id="map"></div>
-
-        <div class="info">
-            <div class="about">
                 <h3 class="title">Redes Sociales</h3>
                 <br>
                 <a href="https://www.facebook.com/crewbarportadriano" class="btn btn-secondary" target="_blank">
@@ -217,12 +209,10 @@ if (isset($_POST['action']) && $_POST['action'] == "login") {
                     </svg></i> Tripadvisor
                 </a>
             </div>
-            <div class="about">
-                <h3 class="title">Horario</h3>
-                <br>
-                <p><strong>Abierto:</strong> Lunes - Sábado &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<strong>Horario:</strong> 8:00h - 22:00h</p>
-            </div>
-        </div>
+
+        </section>
+
+        <div id="map"></div>
 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8x2L4ypAtuKgz7xFc9jE9wlo0dgxq9cY&callback=initMap" defer></script>
 
@@ -230,9 +220,22 @@ if (isset($_POST['action']) && $_POST['action'] == "login") {
 
     <footer>
         <div class="container">
-            <p style="margin: auto;">&copy; 2023 Crew Bar&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp&nbsp+34 638 44 01 77</p>
+            <p style="margin: auto;">&copy; 2023 <?php echo $info['name'] ?>&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp&nbsp+34 <?php echo $info["phone"] ?></p>
         </div>
     </footer>
+
+    <?php
+    if (isset($error)) {
+        $error = "Credenciales inválidas. Por favor, inténtalo de nuevo.";
+        echo '<div id="error-container">';
+        echo '    <div>';
+        echo '        <h3>Advertencia</h3>';
+        echo '    </div>';
+        echo '    <div id="error-message">' . $error . '</div>';
+        echo '</div>';
+        echo '<script>setTimeout(hideError, 3000);</script>';
+    }
+    ?>
 
 </body>
 

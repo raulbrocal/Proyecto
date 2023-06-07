@@ -10,3 +10,19 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     }
 })
+
+function showError(message) {
+    var errorContainer = document.getElementById('error-container');
+    var errorMessage = document.getElementById('error-message');
+
+    errorMessage.textContent = message;
+    errorContainer.style.visibility = 'visible';
+
+    // Ocultar el mensaje de error después de 5 segundos (5000 ms)
+    setTimeout(hideError, 5000);
+}
+
+function hideError() {
+    var errorContainer = document.getElementById('error-container');
+    errorContainer.style.visibility = 'hidden';
+}

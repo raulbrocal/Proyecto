@@ -1,4 +1,8 @@
 <?php
+require_once("../Controller/info.php");
+$infoBL = new RestaurantInfo;
+$res = $infoBL->getRestaurantData();
+
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
     if ($action == "reservation" && isset($_COOKIE['session'])) {
@@ -8,6 +12,7 @@ if (isset($_POST['action'])) {
     } else if ($action == "login") {
         require_once("../Controller/login.php");
         $loginBL = new Login;
+        
         if (isset($_POST['username']) && isset($_POST['password'])) {
             $user = $_POST['username'];
             $psswrd = $_POST['password'];
@@ -114,6 +119,7 @@ if (isset($_POST['action'])) {
         <nav class="navbar navbar-expand-lg navbar-scroll fixed-top shadow-0 border-bottom border-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.php"><img src="../../img/logo.png" alt="logo" style="max-height: 100%;"></a>
+                <h1 style="color: #F7F7F7;"><?php echo $res['name'] ?></h1>
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
@@ -306,12 +312,24 @@ if (isset($_POST['action'])) {
         <?php } ?>
     </div>
 
-
     <footer>
         <div class="container">
-            <p style="margin: auto;">&copy; 2023 Crew Bar. All rights reserved.</p>
+            <p style="margin: auto;">&copy; 2023 <?php echo $res['name'] ?>&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp&nbsp+34 <?php echo $res["phone"] ?></p>
         </div>
     </footer>
+
+    <?php
+    if (isset($error)) {
+        $error = "Credenciales inválidas. Por favor, inténtalo de nuevo.";
+        echo '<div id="error-container">';
+        echo '    <div>';
+        echo '        <h3>Advertencia</h3>';
+        echo '    </div>';
+        echo '    <div id="error-message">' . $error . '</div>';
+        echo '</div>';
+        echo '<script>setTimeout(hideError, 3000);</script>';
+    }
+    ?>
 
 </body>
 

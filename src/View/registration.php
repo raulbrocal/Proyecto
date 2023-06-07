@@ -1,4 +1,8 @@
 <?php
+require_once("../Controller/info.php");
+$infoBL = new RestaurantInfo;
+$info = $infoBL->getRestaurantData();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!isset($_POST['action'])) {
         require_once("../Controller/session.php");
@@ -9,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $loginBL = new Login;
         $res = $loginBL->login($_POST['user'], $_POST['psswrd']);
         if (!$res) {
-            $error = 'Credenciales inválidas. Por favor, inténtalo de nuevo.';
+            $error = 'Usuario y/o contraseña incorrectas. Por favor, inténtalo de nuevo.';
         }
     }
 }
@@ -54,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             padding: 2%;
         }
 
-        h1 {
+        #main h1 {
             text-align: center;
             font-family: sans-serif;
             padding: 15px;
@@ -134,6 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <nav class="navbar navbar-expand-lg navbar-scroll fixed-top shadow-0 border-bottom border-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.php"><img src="../../img/logo.png" alt="logo" style="max-height: 100%;"></a>
+                <h1 style="color: #F7F7F7;"><?php echo $info['name'] ?></h1>
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
@@ -250,9 +255,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <footer>
         <div class="container">
-            <p style="margin: auto;">&copy; 2023 Crew Bar. All rights reserved.</p>
+            <p style="margin: auto;">&copy; 2023 <?php echo $info['name'] ?>&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp&nbsp+34 <?php echo $info["phone"] ?></p>
         </div>
     </footer>
+
+    <?php
+    if (isset($error)) {
+        $error = "Credenciales inválidas. Por favor, inténtalo de nuevo.";
+        echo '<div id="error-container">';
+        echo '    <div>';
+        echo '        <h3>Advertencia</h3>';
+        echo '    </div>';
+        echo '    <div id="error-message">' . $error . '</div>';
+        echo '</div>';
+        echo '<script>setTimeout(hideError, 3000);</script>';
+    }
+    ?>
 
 </body>
 
