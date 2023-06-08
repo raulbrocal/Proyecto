@@ -1,6 +1,6 @@
 <?php
 
-require_once(dirname(__DIR__) . "/../Model/Menu/dessert.php");
+require_once(dirname(__DIR__) . "/../DataAccess/Menu/dessert.php");
 
 class Afters
 {

@@ -1,6 +1,6 @@
 <?php
 
-require_once(dirname(__DIR__) . "/../Model/Menu/food.php");
+require_once(dirname(__DIR__) . "/../DataAccess/Menu/food.php");
 
 class Meal
 {

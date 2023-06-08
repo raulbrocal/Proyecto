@@ -1,10 +1,10 @@
 <?php
-require_once("../Controller/info.php");
+require_once("../Business/info.php");
 $infoBL = new RestaurantInfo;
 $info = $infoBL->getRestaurantData();
 
 if (isset($_POST['action']) && $_POST['action'] == "login") {
-    require_once("../Controller/login.php");
+    require_once("../Business/login.php");
     $loginBL = new Login;
     $res = $loginBL->login($_POST['user'], $_POST['psswrd']);
     if (!$res) {
@@ -108,7 +108,7 @@ if (isset($_POST['action']) && $_POST['action'] == "login") {
                         </form>
                     </div>
                 <?php } else {
-                    require_once("../Controller/session.php");
+                    require_once("../Business/session.php");
                     $userBL = new Session;
                     $userData = $userBL->getUserData($_COOKIE['session']);
                 ?>
@@ -135,7 +135,7 @@ if (isset($_POST['action']) && $_POST['action'] == "login") {
                         <p><strong>Fecha de cumpleaños:</strong> <?php echo $userData['birth_date']; ?></p>
                         <p><strong>Número de teléfono:</strong> <?php echo $userData['phone']; ?></p>
                     </div>
-                    <a class="btn btn-primary" href="../Controller/logout.php" role="button">Cerrar Sesión</a>
+                    <a class="btn btn-primary" href="../Business/logout.php" role="button">Cerrar Sesión</a>
                     <a class="btn btn-primary float-end" href="./reservation.php" role="button">Reserva ya</a>
                 <?php } ?>
             </div>

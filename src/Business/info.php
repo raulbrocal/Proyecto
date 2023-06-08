@@ -4,7 +4,7 @@ class RestaurantInfo
 {
     function getRestaurantData()
     {
-        require_once("../Model/info.php");
+        require_once("../DataAccess/info.php");
         $infoDAL = new Info();
         $array = $infoDAL->getRestaurantData();
         $res = $array[0];

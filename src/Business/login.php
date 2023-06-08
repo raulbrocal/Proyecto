@@ -20,7 +20,7 @@ class Login
 
     function verify($user, $psswrd)
     {
-        require_once("../Model/user.php");
+        require_once("../DataAccess/user.php");
         $userDAL = new User();
         $res = $userDAL->verify($user, $psswrd);
 

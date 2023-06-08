@@ -1,6 +1,6 @@
 <?php
 
-require_once("../Model/user.php");
+require_once("../DataAccess/user.php");
 
 class Session
 {

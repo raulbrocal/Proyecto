@@ -1,16 +1,16 @@
 <?php
-require_once("../Controller/info.php");
+require_once("../Business/info.php");
 $infoBL = new RestaurantInfo;
-$res = $infoBL->getRestaurantData();
+$info = $infoBL->getRestaurantData();
 
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
     if ($action == "reservation" && isset($_COOKIE['session'])) {
-        require_once("../Controller/reservation.php");
+        require_once("../Business/reservation.php");
         $reservationBL = new ReservationLogic;
         $newReservation = $reservationBL->reserveTable($_COOKIE['session'], $_POST['time'], $_POST['date'],  $_POST['people']);
     } else if ($action == "login") {
-        require_once("../Controller/login.php");
+        require_once("../Business/login.php");
         $loginBL = new Login;
         
         if (isset($_POST['username']) && isset($_POST['password'])) {
@@ -119,7 +119,7 @@ if (isset($_POST['action'])) {
         <nav class="navbar navbar-expand-lg navbar-scroll fixed-top shadow-0 border-bottom border-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.php"><img src="../../img/logo.png" alt="logo" style="max-height: 100%;"></a>
-                <h1 style="color: #F7F7F7;"><?php echo $res['name'] ?></h1>
+                <h1 style="color: #F7F7F7;"><?php echo $info['name'] ?></h1>
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
@@ -166,7 +166,7 @@ if (isset($_POST['action'])) {
 
                     </div>
                 <?php } else {
-                    require_once("../Controller/session.php");
+                    require_once("../Business/session.php");
                     $userBL = new Session;
                     $userData = $userBL->getUserData($_COOKIE['session']);
                 ?>
@@ -193,7 +193,7 @@ if (isset($_POST['action'])) {
                         <p><strong>Fecha de cumpleaños:</strong> <?php echo $userData['birth_date']; ?></p>
                         <p><strong>Número de teléfono:</strong> <?php echo $userData['phone']; ?></p>
                     </div>
-                    <a class="btn btn-primary" href="../Controller/logout.php" role="button">Cerrar Sesión</a>
+                    <a class="btn btn-primary" href="../Business/logout.php" role="button">Cerrar Sesión</a>
                     <a class="btn btn-primary float-end" href="./reservation.php" role="button">Reserva ya</a>
                 <?php } ?>
             </div>
@@ -314,7 +314,7 @@ if (isset($_POST['action'])) {
 
     <footer>
         <div class="container">
-            <p style="margin: auto;">&copy; 2023 <?php echo $res['name'] ?>&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp&nbsp+34 <?php echo $res["phone"] ?></p>
+            <p style="margin: auto;">&copy; 2023 <?php echo $info['name'] ?>&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp&nbsp+34 <?php echo $info["phone"] ?></p>
         </div>
     </footer>
 

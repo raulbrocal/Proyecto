@@ -1,6 +1,6 @@
 <?php
 
-require_once("../Model/reservation.php");
+require_once("../DataAccess/reservation.php");
 
 class ReservationLogic
 {

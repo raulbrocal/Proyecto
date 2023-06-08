@@ -1,10 +1,10 @@
 <?php
-require_once("../Controller/info.php");
+require_once("../Business/info.php");
 $infoBL = new RestaurantInfo;
 $info = $infoBL->getRestaurantData();
 
 if (isset($_POST['action']) && $_POST['action'] == "login") {
-    require_once("../Controller/login.php");
+    require_once("../Business/login.php");
     $loginBL = new Login;
     $res = $loginBL->login($_POST['user'], $_POST['psswrd']);
     if (!$res) {
@@ -173,7 +173,7 @@ if (isset($_POST['action']) && $_POST['action'] == "login") {
                     </div>
                     <div class="error"><?php echo isset($error) ? $error : ''; ?></div>
                 <?php } else {
-                    require_once("../Controller/session.php");
+                    require_once("../Business/session.php");
                     $userBL = new Session;
                     $userData = $userBL->getUserData($_COOKIE['session']);
                 ?>
@@ -200,7 +200,7 @@ if (isset($_POST['action']) && $_POST['action'] == "login") {
                         <p><strong>Fecha de cumpleaños:</strong> <?php echo $userData['birth_date']; ?></p>
                         <p><strong>Número de teléfono:</strong> <?php echo $userData['phone']; ?></p>
                     </div>
-                    <a class="btn btn-primary" href="../Controller/logout.php" role="button">Cerrar Sesión</a>
+                    <a class="btn btn-primary" href="../Business/logout.php" role="button">Cerrar Sesión</a>
                     <a class="btn btn-primary float-end" href="./reservation.php" role="button">Reserva ya</a>
                 <?php } ?>
             </div>
@@ -218,26 +218,26 @@ if (isset($_POST['action']) && $_POST['action'] == "login") {
         </div>
         <br><br><br><br><br>
         <div id="main">
-            <?php require_once(dirname(__DIR__) . "/Controller/Menu/drink.php"); ?>
+            <?php require_once(dirname(__DIR__) . "/Business/Menu/drink.php"); ?>
             <div id="beverages" class="category">
                 <?php $drinksBL = new Beverage();
                 $drinksBL->getDrinks() ?>
                 <br><br><br><br><br>
             </div>
-            <?php require_once(dirname(__DIR__) . "/Controller/Menu/starters.php"); ?>
+            <?php require_once(dirname(__DIR__) . "/Business/Menu/starters.php"); ?>
             <div id="appetizers" class="category">
                 <h2>Entrantes</h2>
                 <?php $startersBL = new Appetizer();
                 $startersBL->getStarters() ?>
                 <br><br><br><br><br>
             </div>
-            <?php require_once(dirname(__DIR__) . "/Controller/Menu/food.php"); ?>
+            <?php require_once(dirname(__DIR__) . "/Business/Menu/food.php"); ?>
             <div id="food" class="category">
                 <?php $foodBL = new Meal();
                 $foodBL->getFoods() ?>
                 <br><br><br><br><br>
             </div>
-            <?php require_once(dirname(__DIR__) . "/Controller/Menu/dessert.php"); ?>
+            <?php require_once(dirname(__DIR__) . "/Business/Menu/dessert.php"); ?>
             <div id="desserts" class="category">
                 <h2>Postres</h2>
                 <?php $dessertBL = new Afters();

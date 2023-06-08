@@ -1,15 +1,15 @@
 <?php
-require_once("../Controller/info.php");
+require_once("../Business/info.php");
 $infoBL = new RestaurantInfo;
 $info = $infoBL->getRestaurantData();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!isset($_POST['action'])) {
-        require_once("../Controller/session.php");
+        require_once("../Business/session.php");
         $userBL = new Session;
         $newUser = $userBL->registerNewUser($_POST['username'], $_POST['name'], $_POST['surname'], $_POST['email'], $_POST['phone'], $_POST['birth'], $_POST['password']);
     } else {
-        require_once("../Controller/login.php");
+        require_once("../Business/login.php");
         $loginBL = new Login;
         $res = $loginBL->login($_POST['user'], $_POST['psswrd']);
         if (!$res) {
@@ -185,7 +185,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                     <div class="error"><?php echo isset($error) ? $error : ''; ?></div>
                 <?php } else {
-                    require_once("../Controller/session.php");
+                    require_once("../Business/session.php");
                     $userBL = new Session;
                     $userData = $userBL->getUserData($_COOKIE['session']);
                 ?>
@@ -212,7 +212,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <p><strong>Fecha de cumpleaños:</strong> <?php echo $userData['birth_date']; ?></p>
                         <p><strong>Número de teléfono:</strong> <?php echo $userData['phone']; ?></p>
                     </div>
-                    <a class="btn btn-primary" href="../Controller/logout.php" role="button">Cerrar Sesión</a>
+                    <a class="btn btn-primary" href="../Business/logout.php" role="button">Cerrar Sesión</a>
                     <a class="btn btn-primary float-end" href="./reservation.php" role="button">Reserva ya</a>
                 <?php } ?>
             </div>
