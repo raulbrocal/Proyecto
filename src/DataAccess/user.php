@@ -56,7 +56,7 @@ class User
     function getUser($user)
     {
         $connection = $this->connection();
-        $stmt = mysqli_prepare($connection, "SELECT name, surname, email, phone, birth_date FROM user WHERE user_id = ?;");
+        $stmt = mysqli_prepare($connection, "SELECT name, surname, email, phone, birth_date, profile FROM user WHERE user_id = ?;");
         $sanitized_user = mysqli_real_escape_string($connection, $user);
         $stmt->bind_param("s", $sanitized_user);
         $stmt->execute();

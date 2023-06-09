@@ -11,6 +11,13 @@ if (isset($_POST['action']) && $_POST['action'] == "login") {
         $error = 'Usuario y/o contraseña incorrectas. Por favor, inténtalo de nuevo.';
     }
 }
+if (isset($_COOKIE['session'])) {
+    require_once("../Business/session.php");
+    $userBL = new Session;
+    $userData = $userBL->getUserData($_COOKIE['session']);
+} else {
+    header("Location: index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -129,6 +136,11 @@ if (isset($_POST['action']) && $_POST['action'] == "login") {
                 <h1 style="color: #F7F7F7;"><?php echo $info['name'] ?></h1>
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav ms-auto">
+                        <?php if (isset($userData) && $userData['profile'] == 'EMPLOYEE') { ?>
+                            <li class="nav-item">
+                                <a href="management.php"><button type="button" class="btn">Gestión</button></a>
+                            </li>
+                        <?php }; ?>
                         <li class="nav-item">
                             <a href="menu.php"><button type="button" class="btn">Nuestra carta</button></a>
                         </li>
@@ -150,8 +162,8 @@ if (isset($_POST['action']) && $_POST['action'] == "login") {
             </div>
         </nav>
         <div class="toast-container position-fixed">
-            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <?php if (!isset($_COOKIE['session'])) { ?>
+            <div id="liveToast" class="toast fade hide" role="alert" aria-live="assertive" aria-atomic="true">
+                <?php if (!isset($userData)) { ?>
                     <div class="toast-header">
                         <strong class="me-auto">Inicio de sesión</strong>
                         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -171,12 +183,7 @@ if (isset($_POST['action']) && $_POST['action'] == "login") {
                             <a class="btn btn-primary float-end" href="./registration.php" role="button">Registrate</a>
                         </form>
                     </div>
-                    <div class="error"><?php echo isset($error) ? $error : ''; ?></div>
-                <?php } else {
-                    require_once("../Business/session.php");
-                    $userBL = new Session;
-                    $userData = $userBL->getUserData($_COOKIE['session']);
-                ?>
+                <?php } else { ?>
                     <div class="toast-header">
                         <table class="table">
                             <tr>

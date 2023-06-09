@@ -1,4 +1,8 @@
 USE restaurantDB;
+-- Usuario master
+INSERT INTO user (user_id, name, surname, email, phone, birth_date, password, profile) 
+VALUES ('master', 'Usuario', 'Master', 'master@example.com', '123456789', '2000-01-01', '$2y$10$ImxwCZyBCtrQ6z6vF9.Ty.a66lCpM84tCdCvOAfz/Ftc5A9Ia48Iu', 'EMPLOYEE');
+          
 -- Información del restaurante
 INSERT INTO restaurant (name, address, city, country, phone, email, closing_day, opening_time, closing_time)
 VALUES ("Crew Bar","Carrer Platja n3", "Port Adriano", "Islas Baleares", 638440177, "crewbar@gmail.com", "Domingo", "08:00", "22:00");
