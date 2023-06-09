@@ -225,8 +225,7 @@ if (isset($_COOKIE['session'])) {
             echo '    <div id="error-message">' . $error . '</div>';
             echo '</div>';
             echo '<script>setTimeout(hideError, 3000);</script>';
-        }
-        ?>
+        } ?>
 
     </body>
 

@@ -4,11 +4,11 @@ require_once(dirname(__DIR__) . "/../DataAccess/Menu/food.php");
 
 class Meal
 {
-    function __construct()
+    public function __construct()
     {
     }
 
-    function getFoods()
+    public function getFoods()
     {
         $foodDAL = new Food();
         $rs = $foodDAL->getFood();
@@ -17,7 +17,7 @@ class Meal
 
         foreach ($rs as $food) {
             if (!isset($food['type']) || !isset($food['name']) || !isset($food['description']) || !isset($food['allergens']) || !isset($food['price'])) {
-                // Skip the food if any required field is missing
+                // Omitir la entrada si falta algún campo obligatorio
                 continue;
             }
 

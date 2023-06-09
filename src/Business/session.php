@@ -2,21 +2,21 @@
 
 require_once("../DataAccess/user.php");
 
+define('PROFILE', 'client');
 class Session
 {
-    function __construct()
+    public function __construct()
     {
-        define('PROFILE', 'client');
     }
 
-    function registerNewUser($user, $name, $surname, $email, $phone, $birth, $psswd)
+    public function registerNewUser($user, $name, $surname, $email, $phone, $birth, $psswd)
     {
         $userDAL = new User();
         $res = $userDAL->registerNewUser($user, $name, $surname, $email, $phone, $birth, $psswd, PROFILE);
         return $res;
     }
 
-    function getUserData($user)
+    public function getUserData($user)
     {
         $userDAL = new User();
         $res = $userDAL->getUser($user);

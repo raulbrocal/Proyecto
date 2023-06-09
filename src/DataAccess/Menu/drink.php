@@ -4,18 +4,23 @@ require_once(dirname(__DIR__) . "/connection.php");
 
 class Drink
 {
-    function connection()
+    private function connection()
     {
         try {
-            return mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+            $connection = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+            if (!$connection) {
+                throw new Exception("Could not connect to the database.");
+            }
+            return $connection;
         } catch (Exception $e) {
-            return ("Could not connect to database:" . $e->getMessage());
+            throw new Exception("Could not connect to the database: " . $e->getMessage());
         }
     }
-    function getDrinks()
+
+    public function getDrinks()
     {
-        $conn = $this->connection();
-        $stmt = "SELECT name, ml, price, type FROM drink ORDER BY
+        $connection = $this->connection();
+        $query = "SELECT name, ml, price, type FROM drink ORDER BY
           CASE
             WHEN type = 'Refresco' THEN 1
             WHEN type = 'Cóctel' THEN 2
@@ -31,15 +36,28 @@ class Drink
             WHEN type LIKE 'Vino%' THEN price
             ELSE NULL
           END DESC,
-          name;";
-        $res = $conn->query($stmt);
-        $drinks = array();
-        if ($res->num_rows > 0) {
-            while ($row = $res->fetch_assoc()) {
-                $drinks[] = $row;
-            }
+          name";
+        $statement = mysqli_prepare($connection, $query);
+
+        if (!$statement) {
+            throw new Exception("Error executing the database query.");
         }
-        $conn->close();
-        return $res;
+
+        mysqli_stmt_execute($statement);
+        $result = mysqli_stmt_get_result($statement);
+
+        if (!$result) {
+            throw new Exception("Error retrieving data from the database.");
+        }
+
+        $drinks = array();
+        while ($row = mysqli_fetch_assoc($result)) {
+            $drinks[] = $row;
+        }
+
+        mysqli_stmt_close($statement);
+        mysqli_close($connection);
+
+        return $drinks;
     }
 }

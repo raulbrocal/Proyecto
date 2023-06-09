@@ -4,12 +4,16 @@ require_once("connection.php");
 
 class Info
 {
-    function connection()
+    private function connection()
     {
         try {
-            return mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+            $connection = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+            if (!$connection) {
+                throw new Exception("Could not connect to the database.");
+            }
+            return $connection;
         } catch (Exception $e) {
-            return ("Could not connect to database:" . $e->getMessage());
+            throw new Exception("Could not connect to the database: " . $e->getMessage());
         }
     }
     function getRestaurantData()

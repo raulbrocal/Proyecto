@@ -4,11 +4,11 @@ require_once(dirname(__DIR__) . "/../DataAccess/Menu/dessert.php");
 
 class Afters
 {
-    function __construct()
+    public function __construct()
     {
     }
 
-    function getDesserts()
+    public function getDesserts()
     {
         $dessertDAL = new Dessert();
         $rs = $dessertDAL->getDesserts();
@@ -16,7 +16,7 @@ class Afters
 
         foreach ($rs as $dessert) {
             if (!isset($dessert['name']) || !isset($dessert['description']) || !isset($dessert['allergens']) || !isset($dessert['price'])) {
-                // Skip the dessert if any required field is missing
+                // Omitir la entrada si falta algún campo obligatorio
                 continue;
             }
 
@@ -44,7 +44,6 @@ class Afters
         if (!file_exists($imagePath)) {
             throw new Exception("Image not found for " . $altText);
         }
-
         $imageTag = "<img src='" . $imagePath . "' alt='" . $altText . "' style='max-width: 100%; height: auto;'/>";
 
         return $imageTag;

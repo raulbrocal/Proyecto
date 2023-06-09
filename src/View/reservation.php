@@ -30,8 +30,6 @@ if (isset($_COOKIE['session'])) {
     require_once("../Business/session.php");
     $userBL = new Session;
     $userData = $userBL->getUserData($_COOKIE['session']);
-} else {
-    header("Location: index.php");
 }
 ?>
 <!DOCTYPE html>

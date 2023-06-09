@@ -4,11 +4,11 @@ require_once(dirname(__DIR__) . "/../DataAccess/Menu/starter.php");
 
 class Appetizer
 {
-    function __construct()
+    public function __construct()
     {
     }
 
-    function getStarters()
+    public function getStarters()
     {
         $startersDAL = new Starter();
         $rs = $startersDAL->getStarters();
@@ -16,7 +16,7 @@ class Appetizer
 
         foreach ($rs as $starter) {
             if (!isset($starter['name']) || !isset($starter['description']) || !isset($starter['allergens']) || !isset($starter['price'])) {
-                // Skip the starter if any required field is missing
+                // Omitir la entrada si falta algún campo obligatorio
                 continue;
             }
 

@@ -4,11 +4,11 @@ require_once("../DataAccess/reservation.php");
 
 class ReservationLogic
 {
-    function __construct()
+    public function __construct()
     {
     }
 
-    function reserveTable($userId, $time, $date, $numberOfPeople)
+    public function reserveTable($userId, $time, $date, $numberOfPeople)
     {
         $reservationDAL = new Reservation();
         $tables = $reservationDAL->getTables($numberOfPeople);

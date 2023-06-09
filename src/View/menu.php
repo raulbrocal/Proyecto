@@ -15,8 +15,6 @@ if (isset($_COOKIE['session'])) {
     require_once("../Business/session.php");
     $userBL = new Session;
     $userData = $userBL->getUserData($_COOKIE['session']);
-} else {
-    header("Location: index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -271,8 +269,7 @@ if (isset($_COOKIE['session'])) {
         echo '    <div id="error-message">' . $error . '</div>';
         echo '</div>';
         echo '<script>setTimeout(hideError, 3000);</script>';
-    }
-    ?>
+    } ?>
 
 </body>
 

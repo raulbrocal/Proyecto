@@ -1,4 +1,5 @@
 <?php
+
 require_once("../DataAccess/management.php");
 
 // Verificar si se recibió la solicitud POST
@@ -22,7 +23,7 @@ class Management
 {
     private $managementDAL;
 
-    function __construct()
+    public function __construct()
     {
         $this->managementDAL = new DatabaseSchema();
     }
@@ -56,7 +57,7 @@ class Management
                 foreach ($tables[$i] as $valor) {
                     $output .= "<td>" . $valor . "</td>";
                 }
-                $output .= "<td><button onclick='delete(\"$table\", " . $tables[$i][array_key_first($tables[$i])] . ")'>Eliminar</button></td>";
+                $output .= "<td><button onclick='deleteRow(\"$table\", " . $tables[$i][array_key_first($tables[$i])] . ")'>Eliminar</button></td>";
                 $output .= "</tr>";
             }
 
@@ -69,7 +70,7 @@ class Management
         return $output;
     }
 
-    function delete($table, $id)
+    public function delete($table, $id)
     {
         $this->managementDAL->deleteRow($table, $id);
     }

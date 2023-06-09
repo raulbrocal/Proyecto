@@ -4,11 +4,11 @@ require_once(dirname(__DIR__) . "/../DataAccess/Menu/drink.php");
 
 class Beverage
 {
-    function __construct()
+    public function __construct()
     {
     }
 
-    function getDrinks()
+    public function getDrinks()
     {
         $drinkDAL = new Drink();
         $rs = $drinkDAL->getDrinks();
@@ -17,7 +17,7 @@ class Beverage
 
         foreach ($rs as $drink) {
             if (!isset($drink['type']) || !isset($drink['name']) || !isset($drink['ml']) || !isset($drink['price'])) {
-                // Skip the drink if any required field is missing
+                // Omitir la entrada si falta algún campo obligatorio
                 continue;
             }
 

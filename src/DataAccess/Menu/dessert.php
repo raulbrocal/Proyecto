@@ -4,26 +4,42 @@ require_once(dirname(__DIR__) . "/connection.php");
 
 class Dessert
 {
-    function connection()
+    private function connection()
     {
         try {
-            return mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+            $connection = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+            if (!$connection) {
+                throw new Exception("Could not connect to the database.");
+            }
+            return $connection;
         } catch (Exception $e) {
-            return ("Could not connect to database:" . $e->getMessage());
+            throw new Exception("Could not connect to the database: " . $e->getMessage());
         }
     }
-    function getDesserts()
+
+    public function getDesserts()
     {
-        $conn = $this->connection();
-        $stmt = "SELECT name, description, allergens, price FROM dessert ORDER BY name;";
-        $res = $conn->query($stmt);
-        $desserts = array();
-        if ($res->num_rows > 0) {
-            while ($row = $res->fetch_assoc()) {
-                $desserts[] = $row;
-            }
+        $connection = $this->connection();
+        $query = "SELECT name, description, allergens, price FROM dessert ORDER BY name";
+        $statement = mysqli_prepare($connection, $query);
+        if (!$statement) {
+            throw new Exception("Error executing the database query.");
         }
-        $conn->close();
-        return $res;
+
+        mysqli_stmt_execute($statement);
+        $result = mysqli_stmt_get_result($statement);
+        if (!$result) {
+            throw new Exception("Error retrieving data from the database.");
+        }
+
+        $desserts = array();
+        while ($row = mysqli_fetch_assoc($result)) {
+            $desserts[] = $row;
+        }
+
+        mysqli_stmt_close($statement);
+        mysqli_close($connection);
+
+        return $desserts;
     }
 }
