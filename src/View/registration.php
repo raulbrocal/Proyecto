@@ -223,7 +223,7 @@ if (isset($_COOKIE['session'])) {
             </div>
         </div>
     </header>
-    <div>
+    <div style="height: 200%;">
         <?php if (isset($newUser)) { ?>
             <div class="toast-container" id="error">
                 <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">

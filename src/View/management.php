@@ -41,7 +41,7 @@ if (isset($_COOKIE['session'])) {
             margin: 0 auto;
             text-align: center;
             padding: 20px;
-            height: 100%;
+            height: 89vh;
         }
 
         .select-wrapper {

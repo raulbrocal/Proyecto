@@ -120,13 +120,12 @@ class DatabaseSchema
         }
     }
 
-    public function deleteRow($tabla, $id)
+    public function deleteRow($tabla, $id, $idName)
     {
         $connection = $this->connection();
 
-        $sql = "DELETE FROM $tabla WHERE id = ?";
+        $sql = "DELETE FROM $tabla WHERE $id = '$idName'";
         $stmt = mysqli_prepare($connection, $sql);
-        mysqli_stmt_bind_param($stmt, "s", $id);
         mysqli_stmt_execute($stmt);
 
         $affectedRows = mysqli_stmt_affected_rows($stmt);

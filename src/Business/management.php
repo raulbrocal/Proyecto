@@ -4,8 +4,18 @@ require_once("../DataAccess/management.php");
 
 // Verificar si se recibió la solicitud POST
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Verificar si se recibió el parámetro "tabla"
-    if (isset($_POST["tabla"])) {
+    // Verificar si se recibieron los parámetros "tabla" e "id"
+    if (isset($_POST["tabla"]) && isset($_POST["id"]) && isset($_POST["idName"])) {
+        $tabla = $_POST["tabla"];
+        $id = $_POST["id"];
+        $idName = $_POST["idName"];
+
+        // Crear una instancia de la clase Management
+        $management = new Management();
+
+        // Llamar a la función delete con los valores de tabla e id
+        $management->deleteRow($tabla, $id, $idName);
+    } else if (isset($_POST["tabla"])) {
         $tabla = $_POST["tabla"];
 
         // Crear una instancia de la clase Management
@@ -57,7 +67,8 @@ class Management
                 foreach ($tables[$i] as $valor) {
                     $output .= "<td>" . $valor . "</td>";
                 }
-                $output .= "<td><button onclick='deleteRow(\"$table\", " . $tables[$i][array_key_first($tables[$i])] . ")'>Eliminar</button></td>";
+                $idName = array_key_first($tables[$i]); // Obtener el nombre de la columna de ID
+                $output .= "<td><button class='btn-eliminar' onclick='deleteRow(\"$table\", \"" . $idName . "\", \"" . $tables[$i][$idName] . "\")'>Eliminar</button></td>";
                 $output .= "</tr>";
             }
 
@@ -70,8 +81,8 @@ class Management
         return $output;
     }
 
-    public function delete($table, $id)
+    public function deleteRow($table, $id, $idName)
     {
-        $this->managementDAL->deleteRow($table, $id);
+        $this->managementDAL->deleteRow($table, $id, $idName);
     }
 }

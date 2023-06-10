@@ -28,7 +28,7 @@ class User
 
         $stmt = mysqli_prepare($connection, "INSERT INTO user (user_id, name, surname, email, phone, birth_date, password, profile) VALUES (?,?,?,?,?,?,?,?);");
         $hash = password_hash($psswd, PASSWORD_DEFAULT);
-        mysqli_stmt_bind_param($stmt, "ssssssss", $user, $name, $surname, $email, $phone, $birth, $hash, $profile);
+        mysqli_stmt_bind_param($stmt, "ssssisss", $user, $name, $surname, $email, $phone, $birth, $hash, $profile);
 
         try {
             $res = mysqli_stmt_execute($stmt);
