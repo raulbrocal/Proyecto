@@ -113,7 +113,16 @@ class DatabaseSchema
             } else {
                 mysqli_stmt_close($stmt);
                 mysqli_close($connection);
-                return array();
+
+                // Crear un array con los nombres de las columnas
+                $columnNames = array();
+                foreach ($this->tablesBBDD[$table] as $columnName) {
+                    $columnNames[] = $columnName;
+                }
+
+                $emptyTableData = array($columnNames);
+
+                return $emptyTableData;
             }
         } else {
             return null;
@@ -126,6 +135,40 @@ class DatabaseSchema
 
         $sql = "DELETE FROM $tabla WHERE $id = '$idName'";
         $stmt = mysqli_prepare($connection, $sql);
+        mysqli_stmt_execute($stmt);
+
+        $affectedRows = mysqli_stmt_affected_rows($stmt);
+
+        mysqli_stmt_close($stmt);
+        mysqli_close($connection);
+
+        return $affectedRows > 0;
+    }
+
+    public function insertRow($table, $data, $columns)
+    {
+        $connection = $this->connection();
+        $columnNames = implode(', ', $columns);
+        $columnValues = implode(', ', array_fill(0, count($columns), '?'));
+
+        $sql = "INSERT INTO $table ($columnNames) VALUES ($columnValues)";
+        $stmt = mysqli_prepare($connection, $sql);
+
+        // Bind values dynamically
+        $types = '';
+        $bindParams = [];
+        foreach ($data as $value) {
+            if (is_numeric($value)) {
+                $types .= 'i'; // Integer
+            } else {
+                $types .= 's'; // String
+            }
+            $bindParams[] = $value;
+        }
+
+        array_unshift($bindParams, $stmt, $types);
+        call_user_func_array('mysqli_stmt_bind_param', $bindParams);
+
         mysqli_stmt_execute($stmt);
 
         $affectedRows = mysqli_stmt_affected_rows($stmt);

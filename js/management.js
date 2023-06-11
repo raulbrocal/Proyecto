@@ -1,10 +1,43 @@
+// Función para insertar una fila
+function insertRow(table) {
+    var datos = {};
+    var columns = [];
+
+    // Obtener los valores de los inputs
+    $("input[data-column]").each(function () {
+        var columnName = $(this).data("column");
+        var columnValue = $(this).val();
+        datos[columnName] = columnValue;
+        columns.push(columnName);
+    });
+
+    // Realizar la llamada AJAX para insertar la fila
+    $.ajax({
+        url: "http://localhost/Proyecto/src/Business/management.php",
+        method: "POST",
+        data: {
+            tabla: table,
+            datos: JSON.stringify(datos),
+            columnas: JSON.stringify(columns)
+        },
+        success: function (response) {
+            // Actualizar la tabla después de insertar la fila
+            showDataTable(table);
+        },
+        error: function () {
+            alert("Error al insertar la fila.");
+        }
+    });
+}
+
+
 // Función para eliminar una fila
 function deleteRow(tabla, id, idName) {
     // Realiza la llamada AJAX para eliminar la fila
     $.ajax({
         url: "http://localhost/Proyecto/src/Business/management.php",
         method: "POST",
-        data: { tabla: tabla, id: id, idName: idName},
+        data: { tabla: tabla, id: id, idName: idName },
         success: function (response) {
             // Actualiza la tabla después de eliminar la fila
             showDataTable(tabla);

@@ -67,7 +67,6 @@ if (isset($_COOKIE['session'])) {
 
         div#tablaDatos table th,
         div#tablaDatos table td {
-            padding: 8px;
             border: 1px solid #ddd;
             white-space: nowrap;
             overflow: hidden;
@@ -85,7 +84,6 @@ if (isset($_COOKIE['session'])) {
             font-size: 14px;
             border-radius: 4px;
             background-color: #FF6666;
-            ;
             color: white;
             border: none;
         }
@@ -96,9 +94,17 @@ if (isset($_COOKIE['session'])) {
         }
 
         div#tablaDatos {
+            text-align: center;
             max-height: 89%;
             flex-grow: 1;
             overflow-y: auto;
+        }
+
+        input[type="text"] {
+            padding: 0;
+            width: 70%;
+            box-sizing: border-box;
+            font-size: 14px;
         }
     </style>
 </head>
