@@ -27,4 +27,18 @@ class Session
         $res = $userDAL->getUser($user);
         return $res;
     }
+
+    public function getReservation($user)
+    {
+        $userDAL = new User();
+        $totalReservations = $userDAL->getTotalReservations($user);
+        $lastReservation = $userDAL->getLastReservation($user);
+
+        $reservationData = array(
+            'totalReservations' => $totalReservations,
+            'lastReservation' => $lastReservation
+        );
+
+        return $reservationData;
+    }
 }

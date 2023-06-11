@@ -91,6 +91,56 @@ class User
         return $row;
     }
 
+    public function getLastReservation($user)
+    {
+        $connection = $this->connection();
+
+        $stmt = mysqli_prepare($connection, "    SELECT 
+        reservationSchedule.table_number,
+        reservationSchedule.time,
+        reservationSchedule.date
+    FROM
+        reservation
+            INNER JOIN
+        reservationSchedule ON reservation.schedule_id = reservationSchedule.schedule_id
+    WHERE
+        reservation.user_id = ?
+    ORDER BY reservationSchedule.date ASC , reservationSchedule.time ASC
+    LIMIT 1;");
+        mysqli_stmt_bind_param($stmt, "s", $user);
+
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $row = mysqli_fetch_assoc($result);
+
+        mysqli_stmt_close($stmt);
+        mysqli_close($connection);
+
+        return $row;
+    }
+
+    public function getTotalReservations($user)
+    {
+        $connection = $this->connection();
+
+        $stmt = mysqli_prepare($connection, "
+            SELECT COUNT(reservation_id) as total_reservations
+            FROM reservation
+            WHERE user_id = ?
+        ");
+        mysqli_stmt_bind_param($stmt, "s", $user);
+
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $row = mysqli_fetch_assoc($result);
+
+        mysqli_stmt_close($stmt);
+        mysqli_close($connection);
+
+        return $row['total_reservations'] ?? 0;
+    }
+
+
     private function validateUserData($user, $name, $surname, $email, $phone, $birth, $psswd, $profile)
     {
         // Realiza la validación de los datos de entrada según tus requisitos

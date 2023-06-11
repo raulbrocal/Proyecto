@@ -21,6 +21,7 @@ if (isset($_COOKIE['session'])) {
     require_once("../Business/session.php");
     $userBL = new Session;
     $userData = $userBL->getUserData($_COOKIE['session']);
+    $reservationData = $userBL->getReservation($_COOKIE['session']);
 }
 ?>
 <!DOCTYPE html>
@@ -210,12 +211,22 @@ if (isset($_COOKIE['session'])) {
                             <tr>
                                 <td colspan="3"><?php echo $userData['email']; ?></td>
                             </tr>
+                            <tr>
+                                <td colspan="3"><?php echo "Número de reservas realizadas: " . $reservationData['totalReservations']; ?></td>
+                            </tr>
                         </table>
                     </div>
                     <div class="toast-body">
-                        <p><strong>Número de reservas:</strong> 1</p>
-                        <p><strong>Fecha de cumpleaños:</strong> <?php echo $userData['birth_date']; ?></p>
-                        <p><strong>Número de teléfono:</strong> <?php echo $userData['phone']; ?></p>
+                        <?php if ($reservationData['lastReservation']) { ?>
+                            <p><strong>Próxima reserva:</strong>
+                            <ul>
+                                <li>Fecha y Hora: <?php echo date('h:i - d/m/Y', strtotime($reservationData['lastReservation']['date'] . ' ' . $reservationData['lastReservation']['time'])); ?></li>
+                                <li>N° de mesa: <?php echo $reservationData['lastReservation']['table_number']; ?></li>
+                            </ul>
+                            </p>
+                        <?php } ?>
+                        <p><strong>Cumpleaños:</strong> <?php echo $userData['birth_date']; ?></p>
+                        <p><strong>Teléfono:</strong> <?php echo $userData['phone']; ?></p>
                     </div>
                     <a class="btn btn-primary" href="../Business/logout.php" role="button">Cerrar Sesión</a>
                     <a class="btn btn-primary float-end" href="./reservation.php" role="button">Reserva ya</a>
@@ -223,39 +234,26 @@ if (isset($_COOKIE['session'])) {
             </div>
         </div>
     </header>
-    <div style="height: 200%;">
-        <?php if (isset($newUser)) { ?>
-            <div class="toast-container" id="error">
-                <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="d-flex">
-                        <div class="toast-body">
-                            Hello, world! This is a toast message.
-                        </div>
-                        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                </div>
-            </div>
-        <?php } ?>
-        <div id="main">
-            <h1>Únete a nosotros</h1>
-            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off">
-                <label for="name">Nombre</label><br>
-                <input type="text" id="name" name="name" placeholder="Nombre*" autofocus maxlength="20" required><br>
-                <label for="surname">Apellidos</label><br>
-                <input type="text" id="surname" name="surname" maxlength="60" required><br>
-                <label for="email">Email</label><br>
-                <input type="text" id="email" name="email" placeholder="hola@gmail.com" maxlength="250" required><br>
-                <label for="birth">Fecha de nacimiento</label><br>
-                <input type="date" id="birth" name="birth" max="2020-12-31" required><br>
-                <label for="phone">Número de teléfono</label><br>
-                <input type="text" id="phone" name="phone" maxlength="10" title="Déjenos su número de teléfono para contactar con usted." required><br>
-                <label for="username">Usuario</label><br>
-                <input type="text" id="username" name="username" placeholder="usuario_123" autofocus maxlength="20" title="El nombre de usuario debe ser una palabra de 5 a 20 caracteres sin espacios pudiendo incluir &quot.&quot y &quot_&quot" required><br>
-                <label for="password">Contraseña</label><br>
-                <input type="password" name="password" id="password" placeholder="**********" title="La contraseña debe tener una longitud mínima de 8 caracteres y contener en ella una minúscula, una mayúscula, un número y un caracteres especial" required>
-                <button type="submit" name="submit" id="submit" disabled>Enviar</button>
-            </form>
-        </div>
+
+    <div id="main">
+        <h1>Únete a nosotros</h1>
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off">
+            <label for="name">Nombre</label><br>
+            <input type="text" id="name" name="name" placeholder="Nombre*" autofocus maxlength="20" required><br>
+            <label for="surname">Apellidos</label><br>
+            <input type="text" id="surname" name="surname" maxlength="60" required><br>
+            <label for="email">Email</label><br>
+            <input type="text" id="email" name="email" placeholder="hola@gmail.com" maxlength="250" required><br>
+            <label for="birth">Fecha de nacimiento</label><br>
+            <input type="date" id="birth" name="birth" max="2020-12-31" required><br>
+            <label for="phone">Número de teléfono</label><br>
+            <input type="text" id="phone" name="phone" maxlength="10" title="Déjenos su número de teléfono para contactar con usted." required><br>
+            <label for="username">Usuario</label><br>
+            <input type="text" id="username" name="username" placeholder="usuario_123" autofocus maxlength="20" title="El nombre de usuario debe ser una palabra de 5 a 20 caracteres sin espacios pudiendo incluir &quot.&quot y &quot_&quot" required><br>
+            <label for="password">Contraseña</label><br>
+            <input type="password" name="password" id="password" placeholder="**********" title="La contraseña debe tener una longitud mínima de 8 caracteres y contener en ella una minúscula, una mayúscula, un número y un caracteres especial" required>
+            <button type="submit" name="submit" id="submit" disabled>Enviar</button>
+        </form>
     </div>
 
     <footer>
@@ -264,8 +262,7 @@ if (isset($_COOKIE['session'])) {
         </div>
     </footer>
 
-    <?php
-    if (isset($alert)) {
+    <?php if (isset($alert)) {
         echo $infoBL->getResponse($alert);
     }
     ?>

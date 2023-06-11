@@ -35,6 +35,7 @@ if (isset($_COOKIE['session'])) {
     require_once("../Business/session.php");
     $userBL = new Session;
     $userData = $userBL->getUserData($_COOKIE['session']);
+    $reservationData = $userBL->getReservation($_COOKIE['session']);
 }
 ?>
 <!DOCTYPE html>
@@ -196,12 +197,22 @@ if (isset($_COOKIE['session'])) {
                             <tr>
                                 <td colspan="3"><?php echo $userData['email']; ?></td>
                             </tr>
+                            <tr>
+                                <td colspan="3"><?php echo "Número de reservas realizadas: " . $reservationData['totalReservations']; ?></td>
+                            </tr>
                         </table>
                     </div>
                     <div class="toast-body">
-                        <p><strong>Número de reservas:</strong> 1</p>
-                        <p><strong>Fecha de cumpleaños:</strong> <?php echo $userData['birth_date']; ?></p>
-                        <p><strong>Número de teléfono:</strong> <?php echo $userData['phone']; ?></p>
+                        <?php if ($reservationData['lastReservation']) { ?>
+                            <p><strong>Próxima reserva:</strong>
+                            <ul>
+                                <li>Fecha y Hora: <?php echo date('h:i - d/m/Y', strtotime($reservationData['lastReservation']['date'] . ' ' . $reservationData['lastReservation']['time'])); ?></li>
+                                <li>N° de mesa: <?php echo $reservationData['lastReservation']['table_number']; ?></li>
+                            </ul>
+                            </p>
+                        <?php } ?>
+                        <p><strong>Cumpleaños:</strong> <?php echo $userData['birth_date']; ?></p>
+                        <p><strong>Teléfono:</strong> <?php echo $userData['phone']; ?></p>
                     </div>
                     <a class="btn btn-primary" href="../Business/logout.php" role="button">Cerrar Sesión</a>
                     <a class="btn btn-primary float-end" href="./reservation.php" role="button">Reserva ya</a>
