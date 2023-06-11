@@ -16,6 +16,7 @@ function insertRow(table) {
         url: "http://localhost/Proyecto/src/Business/management.php",
         method: "POST",
         data: {
+            action: "insert",
             tabla: table,
             datos: JSON.stringify(datos),
             columnas: JSON.stringify(columns)
@@ -37,7 +38,12 @@ function deleteRow(tabla, id, idName) {
     $.ajax({
         url: "http://localhost/Proyecto/src/Business/management.php",
         method: "POST",
-        data: { tabla: tabla, id: id, idName: idName },
+        data: {
+            action: "delete",
+            tabla: tabla,
+            id: id,
+            idName: idName
+        },
         success: function (response) {
             // Actualiza la tabla después de eliminar la fila
             showDataTable(tabla);
@@ -53,7 +59,10 @@ function showDataTable(tabla) {
     $.ajax({
         url: "http://localhost/Proyecto/src/Business/management.php",
         method: "POST",
-        data: { tabla: tabla },
+        data: {
+            action: "show",
+            tabla: tabla
+        },
         success: function (response) {
             $("#tablaDatos").html(response);
         },

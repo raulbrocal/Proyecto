@@ -13,7 +13,12 @@ class Session
     {
         $userDAL = new User();
         $res = $userDAL->registerNewUser($user, $name, $surname, $email, $phone, $birth, $psswd, PROFILE);
-        return $res;
+        if ($res) {
+            require_once("login.php");
+            $login = new Login;
+            $login->login($user, $psswd);
+            return $res;
+        }
     }
 
     public function getUserData($user)

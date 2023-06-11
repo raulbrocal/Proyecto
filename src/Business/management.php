@@ -4,36 +4,26 @@ require_once("../DataAccess/management.php");
 
 // Verificar si se recibió la solicitud POST
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
-    if (isset($_POST["tabla"]) && isset($_POST["datos"]) && isset($_POST["columnas"])) {
+    if (isset($_POST["action"])) {
+        $action = $_POST["action"];
         $tabla = $_POST["tabla"];
-        $datos = json_decode($_POST["datos"], true);
-        $columnas = json_decode($_POST["columnas"], true);
-        var_dump($datos);
-        $management = new Management();
-        $management->insertRow($tabla, $datos, $columnas);
-    } else if (isset($_POST["tabla"]) && isset($_POST["id"]) && isset($_POST["idName"])) {
-        // Verificar si se recibieron los parámetros "tabla" e "id"
-        $tabla = $_POST["tabla"];
-        $id = $_POST["id"];
-        $idName = $_POST["idName"];
-
-        // Crear una instancia de la clase Management
         $management = new Management();
 
-        // Llamar a la función delete con los valores de tabla e id
-        $management->deleteRow($tabla, $id, $idName);
-    } else if (isset($_POST["tabla"]) && $_POST["tabla"] != "Seleccione una tabla ...") {
-        $tabla = $_POST["tabla"];
+        if ($action === "insert" && isset($_POST["datos"]) && isset($_POST["columnas"])) {
+            $datos = json_decode($_POST["datos"], true);
+            $columnas = json_decode($_POST["columnas"], true);
 
-        // Crear una instancia de la clase Management
-        $management = new Management();
+            $management->insertRow($tabla, $datos, $columnas);
+        } elseif ($action === "delete" && isset($_POST["id"]) && isset($_POST["idName"])) {
+            $id = $_POST["id"];
+            $idName = $_POST["idName"];
 
-        // Llamar a la función showDataTable con el valor de la tabla
-        $result = $management->showDataTable($tabla);
+            $management->deleteRow($tabla, $id, $idName);
+        } elseif ($action === "show" && $_POST["tabla"] !== "Seleccione una tabla ...") {
+            $result = $management->showDataTable($tabla);
 
-        // Devolver los resultados como respuesta
-        echo $result;
+            echo $result;
+        }
     }
 }
 
@@ -53,10 +43,7 @@ class Management
         // Variable para almacenar los resultados
         $output = '';
 
-        // Construir los resultados en una tabla
         $output .= "<h3>Resultados de la tabla $table:</h3>";
-
-        // Agregar una fila vacía al principio de la tabla
         $output .= "<table>";
         $output .= "<tr>";
 

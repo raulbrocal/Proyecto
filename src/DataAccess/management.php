@@ -150,11 +150,12 @@ class DatabaseSchema
         $connection = $this->connection();
         $columnNames = implode(', ', $columns);
         $columnValues = implode(', ', array_fill(0, count($columns), '?'));
+        var_dump($columnValues);
 
         $sql = "INSERT INTO $table ($columnNames) VALUES ($columnValues)";
         $stmt = mysqli_prepare($connection, $sql);
 
-        // Bind values dynamically
+        // Bind values
         $types = '';
         $bindParams = [];
         foreach ($data as $value) {
