@@ -9,6 +9,11 @@ if (isset($_POST['action'])) {
         require_once("../Business/reservation.php");
         $reservationBL = new ReservationLogic;
         $newReservation = $reservationBL->reserveTable($_COOKIE['session'], $_POST['time'], $_POST['date'],  $_POST['people']);
+        if ($newReservation) {
+            $alert = 'successful';
+        } else {
+            $alert = 'not_possible';
+        }
     } else if ($action == "login") {
         require_once("../Business/login.php");
         $loginBL = new Login;
@@ -22,7 +27,7 @@ if (isset($_POST['action'])) {
         }
         $res = $loginBL->login($user, $psswrd);
         if (!$res) {
-            $error = 'Credenciales inválidas. Por favor, inténtalo de nuevo.';
+            $alert = 'error';
         }
     }
 }
@@ -324,17 +329,9 @@ if (isset($_COOKIE['session'])) {
     </footer>
 
     <?php
-    if (isset($error)) {
-        $error = "Credenciales inválidas. Por favor, inténtalo de nuevo.";
-        echo '<div id="error-container">';
-        echo '    <div>';
-        echo '        <h3>Advertencia</h3>';
-        echo '    </div>';
-        echo '    <div id="error-message">' . $error . '</div>';
-        echo '</div>';
-        echo '<script>setTimeout(hideError, 3000);</script>';
-    }
-    ?>
+    if (isset($alert)) {
+        echo $infoBL->getResponse($alert);
+    } ?>
 </body>
 
 </html>

@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $loginBL = new Login;
         $res = $loginBL->login($_POST['user'], $_POST['psswrd']);
         if (!$res) {
-            $error = 'Usuario y/o contraseña incorrectas. Por favor, inténtalo de nuevo.';
+            $alert = 'error';
         }
     }
 }
@@ -265,15 +265,8 @@ if (isset($_COOKIE['session'])) {
     </footer>
 
     <?php
-    if (isset($error)) {
-        $error = "Credenciales inválidas. Por favor, inténtalo de nuevo.";
-        echo '<div id="error-container">';
-        echo '    <div>';
-        echo '        <h3>Advertencia</h3>';
-        echo '    </div>';
-        echo '    <div id="error-message">' . $error . '</div>';
-        echo '</div>';
-        echo '<script>setTimeout(hideError, 3000);</script>';
+    if (isset($alert)) {
+        echo $infoBL->getResponse($alert);
     }
     ?>
 

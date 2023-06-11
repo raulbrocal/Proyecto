@@ -40,4 +40,47 @@ class RestaurantInfo
 
         return $res;
     }
+
+    function getResponse($param)
+    {
+        $output = '';
+
+        switch ($param) {
+            case "error":
+                $error = "Credenciales inválidas. Por favor, inténtalo de nuevo.";
+                $output .= '<div id="containerDiv" class="error">';
+                $output .= '    <div>';
+                $output .= '        <h3><b>Error</b></h3>';
+                $output .= '    </div>';
+                $output .= '    <div id="message">' . $error . '</div>';
+                $output .= '</div>';
+                $output .= '<script>setTimeout(hide, 3000);</script>';
+                break;
+            case "successful":
+                $message = "Su reserva ha sido realizzada. Para saber más póngase en contacto con nosotros.";
+                $output .= '<div id="containerDiv" class="successful">';
+                $output .= '    <div>';
+                $output .= '        <h3><b>Enhorabuena!</b></h3>';
+                $output .= '    </div>';
+                $output .= '    <div id="message">' . $message . '</div>';
+                $output .= '</div>';
+                $output .= '<script>setTimeout(hide, 3000);</script>';
+                break;
+            case "not_possible":
+                $message = "Su petición para dichas fechas no están disponibles. Porfavor, inténtelo de nuevo.";
+                $output .= '<div id="containerDiv" class="retry">';
+                $output .= '    <div>';
+                $output .= '        <h3><b>No disponible</b></h3>';
+                $output .= '    </div>';
+                $output .= '    <div id="message">' . $message . '</div>';
+                $output .= '</div>';
+                $output .= '<script>setTimeout(hide, 3000);</script>';
+                break;
+            default:
+                $output = 'Opción no válida';
+                break;
+        }
+
+        return $output;
+    }
 }

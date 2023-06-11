@@ -1,9 +1,9 @@
 body {
-    height: 100%;
     margin: 0;
     padding: 0;
     font-family: 'Rubik', sans-serif;
     font-size: 16px;
+    height: 200vh;
 }
 
 link[rel="icon"] {
@@ -128,9 +128,9 @@ footer {
     margin: 0;
 }
 
-#error-container {
+#containerDiv {
     position: fixed;
-    top: 15%;
+    top: 10%;
     left: 50%;
     transform: translateX(-50%);
     background-color: rgba(244, 67, 54, 0.9);
@@ -141,11 +141,23 @@ footer {
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     width: 90%;
-    max-width: 400px;
+    max-width: 450px;
 }
 
-#error-message {
+#message {
     margin-top: 20px;
     font-size: 18px;
     padding: 1%;
+}
+
+#containerDiv.error {
+    background-color: rgba(244, 67, 54, 0.9);
+}
+
+#containerDiv.retry {
+    background-color: rgba(212, 138, 0, 0.9);
+}
+
+#containerDiv.successful {
+    background-color: rgba(65, 151, 65, 0.9);
 }

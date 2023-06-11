@@ -216,17 +216,10 @@ if (isset($_COOKIE['session'])) {
         </footer>
 
         <?php
-        if (isset($error)) {
-            $error = "Credenciales inválidas. Por favor, inténtalo de nuevo.";
-            echo '<div id="error-container">';
-            echo '    <div>';
-            echo '        <h3>Advertencia</h3>';
-            echo '    </div>';
-            echo '    <div id="error-message">' . $error . '</div>';
-            echo '</div>';
-            echo '<script>setTimeout(hideError, 3000);</script>';
-        } ?>
-
+        if (isset($alert)) {
+            echo $infoBL->getResponse($alert);
+        }
+        ?>
     </body>
 
 </html>

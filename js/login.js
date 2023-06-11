@@ -11,18 +11,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 })
 
-function showError(message) {
-    var errorContainer = document.getElementById('error-container');
-    var errorMessage = document.getElementById('error-message');
+function alert(message) {
+    var container = document.getElementById('containerDiv');
+    var errorMessage = document.getElementById('message');
 
     errorMessage.textContent = message;
-    errorContainer.style.visibility = 'visible';
-
-    // Ocultar el mensaje de error después de 5 segundos (5000 ms)
-    setTimeout(hideError, 5000);
+    container.style.visibility = 'visible';
 }
 
-function hideError() {
-    var errorContainer = document.getElementById('error-container');
-    errorContainer.style.visibility = 'hidden';
+function hide() {
+    var container = document.getElementById('containerDiv');
+    container.style.visibility = 'hidden';
 }
