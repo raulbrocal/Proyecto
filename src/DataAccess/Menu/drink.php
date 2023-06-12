@@ -26,16 +26,13 @@ class Drink
             WHEN type = 'Cóctel' THEN 2
             WHEN type LIKE 'Vino tinto%' THEN 3
             WHEN type LIKE 'Vino blanco%' THEN 4
-            WHEN type LIKE 'Vino rosado%' THEN 5
-            WHEN type LIKE 'Vino dulce%' THEN 6
-            WHEN type LIKE 'Vino fortificado%' THEN 7
-            WHEN type LIKE 'Vino aromatizado%' THEN 8
-            ELSE 9
+            WHEN type LIKE 'Vino dulce%' THEN 5
+            ELSE 6
           END,
           CASE
             WHEN type LIKE 'Vino%' THEN price
             ELSE NULL
-          END DESC,
+          END ASC,
           name";
         $statement = mysqli_prepare($connection, $query);
 

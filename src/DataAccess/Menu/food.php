@@ -22,9 +22,9 @@ class Food
         $connection = $this->connection();
         $query = "SELECT name, description, allergens, price, type FROM dishes WHERE type <> 'entrante' ORDER BY
           CASE
-            WHEN type LIKE '%carne%' THEN 1
-            WHEN type LIKE '%pescado%' THEN 2
-            WHEN type LIKE '%pizza%' THEN 3
+            WHEN type LIKE 'carne' THEN 1
+            WHEN type LIKE 'pescado' THEN 2
+            WHEN type LIKE 'pizza' THEN 3
             ELSE 4
           END,
           name";

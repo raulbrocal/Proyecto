@@ -16,17 +16,16 @@ class Info
             throw new Exception("Could not connect to the database: " . $e->getMessage());
         }
     }
+
     function getRestaurantData()
     {
         $connection = $this->connection();
 
-        // Consulta SQL para obtener los datos de la tabla "restaurant"
         $query = "SELECT name, address, city, country, phone, email, closing_day, opening_time, closing_time FROM restaurant";
         $result = mysqli_query($connection, $query);
 
         // Comprobar si se obtuvieron resultados
         if (mysqli_num_rows($result) > 0) {
-            // Array para almacenar los datos de los restaurantes
             $restaurantData = array();
 
             // Obtener los datos de cada fila y guardarlos en el array
@@ -34,7 +33,6 @@ class Info
                 $restaurantData[] = $row;
             }
 
-            // Cerrar la conexión a la base de datos
             mysqli_close($connection);
 
             return $restaurantData;

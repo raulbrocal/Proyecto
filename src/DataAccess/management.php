@@ -150,7 +150,6 @@ class DatabaseSchema
         $connection = $this->connection();
         $columnNames = implode(', ', $columns);
         $columnValues = implode(', ', array_fill(0, count($columns), '?'));
-        var_dump($columnValues);
 
         $sql = "INSERT INTO $table ($columnNames) VALUES ($columnValues)";
         $stmt = mysqli_prepare($connection, $sql);
@@ -158,12 +157,18 @@ class DatabaseSchema
         // Bind values
         $types = '';
         $bindParams = [];
-        foreach ($data as $value) {
+        foreach ($data as $column => $value) {
             if (is_numeric($value)) {
                 $types .= 'i'; // Integer
             } else {
                 $types .= 's'; // String
             }
+
+            if ($table === 'user' && $column === 'password') {
+                // Hash the password
+                $value = password_hash($value, PASSWORD_DEFAULT);
+            }
+
             $bindParams[] = $value;
         }
 
